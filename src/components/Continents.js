@@ -20,8 +20,7 @@ constructor(props){
 }
 
 activateTravel(e){
-    console.log(e);
-    window.alert(e);
+    this.props.sendback(e);
 }
 
 render(){
