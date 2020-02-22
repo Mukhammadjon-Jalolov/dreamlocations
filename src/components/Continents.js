@@ -14,42 +14,40 @@ const useStyles = makeStyles(theme => ({
 class Continents extends Component {
 
 constructor(props){
-    super(props);
-    this.state = {selectedContinent: "" }
+  super(props);
+    this.state = {selectedContinent: "",
+    continentsarray: [{continent: 'Europe', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Asia', val: false}, {continent: 'Australia', val: false}]
+    }
     this.activateTravel = this.activateTravel.bind(this);
 }
 
 activateTravel(e){
-    this.props.sendback(e);
+    var versatile;
+    for (var i=0; i < this.state.continentsarray.length; i++){
+        if (e == this.state.continentsarray[i].continent){
+            var tempobj = JSON.parse(JSON.stringify(this.state.continentsarray))
+            tempobj[i].val = !tempobj[i].val
+            
+            this.setState({continentsarray: tempobj})
+            //versatile.continent = tempobj[i].continent
+            versatile = {'continent': tempobj}
+        }
+    }
+  
+    this.props.sendback(versatile);
 }
 
 render(){
     return (
     <div>
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "europe")}>
+      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "Europe")}>
         Europe
       </Button>
 
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "asia")}>
-      Asia
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "africa")}>
-      Africa
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "namerica")}>
-      North America
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "samerica")}>
-      South America
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "australia")}>
-      Oceania
-      </Button>
-    </div>
+                {this.state.continentsarray.map((result, index) => (
+                    <input type = 'button' className = {result.val?'button':'button2'} value = {result.continent} onClick = {this.activateTravel.bind(this, result.continent)} />
+                ))}
+      </div>
             )
         }
 }

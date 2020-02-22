@@ -13,19 +13,15 @@ constructor(props){
 
 render(){
 
-    const placeitem = this.props.results.pictures.map((result, id) => 
-        <li key={id}>
-            <div>
-                <img src = {this.state.source + result.img} />
-            </div>
-        </li>
-    );
-
+    const Allimages = this.props.images.map((rasm, id) => (
+        <p key = {id}> 
+            {<img src = {this.state.source + rasm.img} />}
+        </p>
+        ))
+    
     return (
     <div>
-        <ul>
-                {placeitem}
-        </ul>
+        {Allimages}
     </div>
             )
         }
