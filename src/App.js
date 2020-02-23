@@ -21,15 +21,14 @@ constructor(props){
     destination: false,
     results: [],
     source: 'data:image/jpeg; base64, ',
-    continentsarray: [{continent: 'Europe', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Asia', val: false}, {continent: 'Australia', val: false}],
-    landscapesarray: ['sea', 'history', 'mountains', 'river', 'beach'],
+    //continentsarray: [{continent: 'Europe', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Asia', val: false}, {continent: 'Australia', val: false}],
+    landscapesarray: [{landscape: 'Sea', val: false}, {landscape: 'Historical', val: false}, {landscape: 'Mountains', val: false}, {landscape: 'River', val: false}, {landscape: 'Beach', val: false}],
     forbutton: 'true'
     };
 
     this.searchType = this.searchType.bind(this);
     this.composeDestination = this.composeDestination.bind(this);
     this.sendback = this.sendback.bind(this);
-    this.newButton = this.newButton.bind(this);
 }
 
 componentDidMount(){
@@ -72,40 +71,15 @@ filterer(data){
 }
 
 searchType(){
-    this.setState({stype: true});
-    this.setState({destination: false});
+    this.setState({stype: !this.state.stype})
 }
+
 composeDestination(){
-    this.setState({destination: true});
-    this.setState({stype: false});
+    this.setState({destination: !this.state.destination})
 }
 
 sendback(versatile){
     const url = 'http://localhost/test.php'
-    
-    axios.post(url, qs.stringify(versatile))
-            .then(response => response.data)
-            .then((data) => {
-            console.log(data)
-            this.filterer(data)
-            })
-}
-
-newButton(data){
-    const url = 'http://localhost/test.php'
-    var versatile;
-    
-    for (var i=0; i < this.state.continentsarray.length; i++){
-        if (data == this.state.continentsarray[i].continent){
-            var tempobj = JSON.parse(JSON.stringify(this.state.continentsarray))
-            tempobj[i].val = !tempobj[i].val
-            
-            this.setState({continentsarray: tempobj})
-            //versatile.continent = tempobj[i].continent
-            versatile = {'continent': tempobj}
-        }
-    }
-    
     
     axios.post(url, qs.stringify(versatile))
             .then(response => response.data)
@@ -120,32 +94,27 @@ render(){
     let destination;
     if(this.state.stype){
         element = <Continents sendback = {this.sendback} />;
+    } else if(!this.state.stype){
+        element = null;
     }
     if(this.state.destination){
         destination = <ComposePlace />;
+    } else if(!this.state.destination){
+        destination = null;
     }
 
 
     return (
             <div className="App">
 
-                
-
             <header>
                 <img src={logo} className="App-logo" alt="logo" />
-
-
-                {this.state.continentsarray.map((result, index) => (
-                    <input type = 'button' className = {result.val?'button':'button2'} value = {result.continent} onClick = {this.newButton.bind(this, result.continent)} />
-                ))}
-
-
 
                 <Button variant="outlined" color="primary" onClick = {this.searchType}>
                   Find by Continents
                 </Button>
                 <Button variant="outlined" color="primary" onClick = {this.composeDestination}>
-                  Find your dream destination
+                  Find by lanscape type
                 </Button>
 
                 {element}

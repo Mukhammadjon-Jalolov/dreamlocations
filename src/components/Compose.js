@@ -15,13 +15,26 @@ class ComposePlace extends Component {
 
 constructor(props){
     super(props);
-    this.state = {selectedContinent: "" }
+    this.state = {selectedContinent: "",
+    landscapesarray: [{landscape: 'Sea', val: false}, {landscape: 'Historical', val: false}, {landscape: 'Mountains', val: false}, {landscape: 'River', val: false}, {landscape: 'Beach', val: false}]
+    }
     this.activateTravel = this.activateTravel.bind(this);
 }
 
 activateTravel(e){
-    console.log(e);
-    window.alert(e);
+  var versatile;
+  for (var i=0; i < this.state.landscapesarray.length; i++){
+      if (e == this.state.landscapesarray[i].landscape){
+          var tempobj = JSON.parse(JSON.stringify(this.state.landscapesarray))
+          tempobj[i].val = !tempobj[i].val
+          
+          this.setState({landscapesarray: tempobj})
+          //versatile.continent = tempobj[i].continent
+          versatile = {'landscape': tempobj}
+      }
+  }
+  console.log(versatile)
+  //this.props.sendback(versatile);
 }
 
 render(){
@@ -30,26 +43,10 @@ render(){
       <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "history")}>
         Historical
       </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "mountain")}>
-        Mountains
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "river")}>
-        River
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "sea")}>
-        Sea/Ocean
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "scyscraper")}>
-        Scyscrapers
-      </Button>
-
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "forest")}>
-        Forest
-      </Button>
+        {this.state.landscapesarray.map((result, index) => (
+                      <input type = 'button' className = {result.val?'button':'button2'} value = {result.landscape} onClick = {this.activateTravel.bind(this, result.landscape)} />
+        ))}
+      
     </div>
             )
         }
