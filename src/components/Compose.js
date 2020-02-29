@@ -16,7 +16,7 @@ class ComposePlace extends Component {
 constructor(props){
     super(props);
     this.state = {selectedContinent: "",
-    landscapesarray: [{landscape: 'Sea', val: false}, {landscape: 'Historical', val: false}, {landscape: 'Mountains', val: false}, {landscape: 'River', val: false}, {landscape: 'Beach', val: false}]
+    landscapesarray: [{landtype: 'sea', val: false}, {landtype: 'history', val: false}, {landtype: 'mountains', val: false}, {landtype: 'river', val: false}, {landtype: 'beach', val: false}, {landtype: 'skyscrapers', val: false}, {landtype: 'desert', val: false}]
     }
     this.activateTravel = this.activateTravel.bind(this);
 }
@@ -24,29 +24,25 @@ constructor(props){
 activateTravel(e){
   var versatile;
   for (var i=0; i < this.state.landscapesarray.length; i++){
-      if (e == this.state.landscapesarray[i].landscape){
+      if (e == this.state.landscapesarray[i].landtype){
           var tempobj = JSON.parse(JSON.stringify(this.state.landscapesarray))
           tempobj[i].val = !tempobj[i].val
           
           this.setState({landscapesarray: tempobj})
           //versatile.continent = tempobj[i].continent
-          versatile = {'landscape': tempobj}
+          versatile = {landscape: tempobj}
       }
   }
-  console.log(versatile)
-  //this.props.sendback(versatile);
+  console.log(tempobj)
+  this.props.sendlandscape(tempobj); // bu yerda versatile bor edi
 }
 
 render(){
     return (
     <div>
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "history")}>
-        Historical
-      </Button>
         {this.state.landscapesarray.map((result, index) => (
-                      <input type = 'button' className = {result.val?'button':'button2'} value = {result.landscape} onClick = {this.activateTravel.bind(this, result.landscape)} />
+          <input type = 'button' className = {result.val?'button':'button2'} value = {result.landtype} onClick = {this.activateTravel.bind(this, result.landtype)} />
         ))}
-      
     </div>
             )
         }

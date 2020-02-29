@@ -21,13 +21,17 @@ constructor(props){
     destination: false,
     results: [],
     source: 'data:image/jpeg; base64, ',
-    //continentsarray: [{continent: 'Europe', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Asia', val: false}, {continent: 'Australia', val: false}],
-    landscapesarray: [{landscape: 'Sea', val: false}, {landscape: 'Historical', val: false}, {landscape: 'Mountains', val: false}, {landscape: 'River', val: false}, {landscape: 'Beach', val: false}],
+    continentstosend: [],
+    landscapestosend: [],
+    filteredplaces: {continent: {}, landscape: {}},
     forbutton: 'true'
     };
 
     this.searchType = this.searchType.bind(this);
     this.composeDestination = this.composeDestination.bind(this);
+    this.sendcontinent = this.sendcontinent.bind(this);
+    this.sendlandscape = this.sendlandscape.bind(this);
+
     this.sendback = this.sendback.bind(this);
 }
 
@@ -78,27 +82,37 @@ composeDestination(){
     this.setState({destination: !this.state.destination})
 }
 
-sendback(versatile){
+sendcontinent(versatile){
+    this.setState({continentstosend: versatile, }, () => {this.sendback()})
+}
+
+sendlandscape(versatile){
+    this.setState({landscapestosend: versatile, }, () => {this.sendback()})
+}
+
+
+sendback(){
     const url = 'http://localhost/test.php'
-    
-    axios.post(url, qs.stringify(versatile))
+
+    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}))
             .then(response => response.data)
             .then((data) => {
             console.log(data)
             this.filterer(data)
             })
+    console.log(this.state.continentstosend)
 }
 
 render(){
     let element;
     let destination;
     if(this.state.stype){
-        element = <Continents sendback = {this.sendback} />;
+        element = <Continents sendcontinent = {this.sendcontinent} />;
     } else if(!this.state.stype){
         element = null;
     }
     if(this.state.destination){
-        destination = <ComposePlace />;
+        destination = <ComposePlace sendlandscape = {this.sendlandscape}/>;
     } else if(!this.state.destination){
         destination = null;
     }
@@ -116,7 +130,7 @@ render(){
                 <Button variant="outlined" color="primary" onClick = {this.composeDestination}>
                   Find by lanscape type
                 </Button>
-
+                <br/><br/>
                 {element}
                 {destination}<br/>
                 There should be data from the backend:

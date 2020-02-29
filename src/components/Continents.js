@@ -16,7 +16,7 @@ class Continents extends Component {
 constructor(props){
   super(props);
     this.state = {selectedContinent: "",
-    continentsarray: [{continent: 'Europe', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Asia', val: false}, {continent: 'Australia', val: false}]
+    continentsarray: [{continent: 'Europe', val: false}, {continent: 'Asia', val: false}, {continent: 'Africa', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Australia', val: false}]
     }
     this.activateTravel = this.activateTravel.bind(this);
 }
@@ -30,20 +30,16 @@ activateTravel(e){
             
             this.setState({continentsarray: tempobj})
             //versatile.continent = tempobj[i].continent
-            versatile = {'continent': tempobj}
+            versatile = {continent: tempobj}
         }
     }
-  
-    this.props.sendback(versatile);
+    console.log(tempobj)
+    this.props.sendcontinent(tempobj); // Bu yerda versatile bor edi
 }
 
 render(){
     return (
     <div>
-      <Button variant="outlined" color="primary" onClick = {this.activateTravel.bind(this, "Europe")}>
-        Europe
-      </Button>
-
                 {this.state.continentsarray.map((result, index) => (
                     <input type = 'button' className = {result.val?'button':'button2'} value = {result.continent} onClick = {this.activateTravel.bind(this, result.continent)} />
                 ))}
