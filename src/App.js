@@ -1,16 +1,29 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
-import santiago from './santiago.jpg';
 import './App.css';
+import Header from './components/Header';
 import Continents from './components/Continents';
 import ComposePlace from './components/Compose';
 import ListView from './components/List';
+import About from './components/About';
+import Nav from './components/Nav';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ImageComp from './components/Imagecomponent';
 import { URLSearchParams } from 'url';
 import qs from 'qs';
+
+
+import image from './santiago.jpg';
+import image2 from './sany.jpg';
+import image3 from './sauckland.jpg';
+
+
+import { render } from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 
 class App extends Component {
@@ -24,7 +37,8 @@ constructor(props){
     continentstosend: [],
     landscapestosend: [],
     filteredplaces: {continent: {}, landscape: {}},
-    forbutton: 'true'
+    value:null,
+    
     };
 
     this.searchType = this.searchType.bind(this);
@@ -33,7 +47,10 @@ constructor(props){
     this.sendlandscape = this.sendlandscape.bind(this);
 
     this.sendback = this.sendback.bind(this);
+
 }
+
+
 
 componentDidMount(){
     const url = 'http://localhost/test.php'
@@ -50,6 +67,17 @@ componentDidMount(){
         console.log(typeof data)  //response.data
     }); */
 
+
+
+}
+
+
+handleChange (event, newValue) {
+    this.setValue(newValue);
+}
+
+handleChangeIndex (index){
+    this.setValue(index)
 }
 
 filterer(data){
@@ -60,11 +88,16 @@ filterer(data){
         //this.setState({results:texts})
 
         let tempresults = JSON.parse(JSON.stringify(this.state.results))
-        for (var i = 0; i < resultsimg.length; i++){
-            //tempresults[i].images = null
-            //tempresults[i].images = resultsimg[i].pictures
-            texts[i].images = resultsimg[i].pictures
-        }
+for (var i = 0; i < resultsimg.length; i++){
+    var temptemparr = []
+    var temptemp = {}
+    for (var j = 0; j < resultsimg[i].pictures.length; j++){
+        temptemp = {src: this.state.source + resultsimg[i].pictures[j].img, thumbnail: this.state.source + resultsimg[i].pictures[j].img, thumbnailWidth: 320, thumbnailHeight: 174}
+        temptemparr.push(temptemp)
+    }
+    texts[i].images = temptemparr
+    //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
+}
         this.setState({results:texts})
         console.log(this.state.results)
         //console.log(this.state.results[0].images)
@@ -73,6 +106,14 @@ filterer(data){
         this.setState({results:[]})
     }
 }
+/*
+var singlepic = []
+    this.props.images.forEach(element => {
+        var tempimg = {src: this.state.source + element.img, thumbnail: this.state.source + element.img, thumbnailWidth: 320,
+            thumbnailHeight: 174}
+        singlepic.push(tempimg)
+    })
+    this.createAlbum(singlepic)*/
 
 searchType(){
     this.setState({stype: !this.state.stype})
@@ -97,13 +138,15 @@ sendback(){
     axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}))
             .then(response => response.data)
             .then((data) => {
-            console.log(data)
+            //console.log(data)     // IS LEFT FOR TESTING PURPOSES
             this.filterer(data)
             })
-    console.log(this.state.continentstosend)
+    //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
 }
 
 render(){
+
+
     let element;
     let destination;
     if(this.state.stype){
@@ -120,9 +163,9 @@ render(){
 
     return (
             <div className="App">
-
-            <header>
-                <img src={logo} className="App-logo" alt="logo" />
+            <Header />
+            
+                <div className = 'Content'>
 
                 <Button variant="outlined" color="primary" onClick = {this.searchType}>
                   Find by Continents
@@ -130,15 +173,14 @@ render(){
                 <Button variant="outlined" color="primary" onClick = {this.composeDestination}>
                   Find by lanscape type
                 </Button>
+                
                 <br/><br/>
                 {element}
                 {destination}<br/>
                 There should be data from the backend:
                 <ListView results = {this.state.results} />
                 
-            </header>
-            
-                
+                </div>
 
             </div>
 

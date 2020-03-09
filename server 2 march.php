@@ -17,12 +17,11 @@ $landscapestosend = array();
 
 
 if($method == 'POST'){
-	/*
-	if($_POST['continent']){
+	
+	if(isset($_POST['continent'])){
 		$cont = $_POST['continent'];
-
 		foreach($cont as $item){
-			if($item['val'] === 'true'){
+			if($item['val'] == 'true'){
 				array_push($continentstosend, $item);
 			}
 		}
@@ -34,9 +33,9 @@ if($method == 'POST'){
 			//}
 			$truecont = $truecont . "continent = '" . $continentstosend[$y]['continent']. "'" .(($y < count($continentstosend)-1)?' OR ':'');
 		}
-	} */
+	}
 
-	if($_POST['landscape']){
+	if(isset($_POST['landscape'])){
 		$land = $_POST['landscape'];
 
 		foreach($land as $item){
@@ -53,8 +52,23 @@ if($method == 'POST'){
 	//$query = "select * from places " .((count($continentstosend) != 0)?"where $truecont":'')
 	
 	//$query = "select * FROM places where (continent = 'Asia' OR continent = 'Europe' OR continent = 'South America') AND (landscapes LIKE '%history%' AND landscapes LIKE '%skyscrapers%')";
-	if(count($landscapestosend) != 0){ // This validation is to check weather $truecont has correct string
+	
+	/*if(count($landscapestosend) != 0){ // This validation is to check weather $truecont has correct string
 		$query = "select * FROM places where $truelands";
+		Somedata($conn, $query);
+	} */
+	//$query = "select * FROM places where continent = 'Europe' AND landscapes LIKE '%history%'";
+	if(count($continentstosend) != 0){
+		$query = "select * FROM places where ($truecont)";
+	} elseif(count($landscapestosend) != 0){
+		$query = "select * FROM places where ($truelands)";
+	}
+
+	if(count($continentstosend) != 0 and count($landscapestosend) != 0){
+		$query = "select * FROM places where ($truecont) AND ($truelands)";
+	}
+
+	if(count($continentstosend) != 0 or count($landscapestosend) != 0){
 		Somedata($conn, $query);
 	}
 
@@ -83,7 +97,6 @@ echo 'separatorplace';
 
 $query = "select * from places";
 $result = mysqli_query($conn, $query);
-
 
 
 echo '[';

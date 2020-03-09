@@ -3,13 +3,6 @@ import '../App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
 
 class Continents extends Component {
 
@@ -43,7 +36,10 @@ render(){
                 {this.state.continentsarray.map((result, index) => (
                     <input type = 'button' className = {result.val?'button':'button2'} value = {result.continent} onClick = {this.activateTravel.bind(this, result.continent)} />
                 ))}
-      </div>
+    
+
+
+    </div>
             )
         }
 }

@@ -24,6 +24,11 @@
   color: white;
 }
 
+.App .Content {
+  padding-top: 100px;
+  text-align: center;
+}
+
 .App-link {
   color: #61dafb;
 }
