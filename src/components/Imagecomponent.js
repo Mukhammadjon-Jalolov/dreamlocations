@@ -32,7 +32,7 @@ createAlbum(data){
 
 render(){
 
-    const Rasmlar = <Gallery images = {this.state.rasmsaqla}/>
+    const Rasmlar = <Gallery images = {this.state.rasmsaqla} />
     
     return (
                 <div>

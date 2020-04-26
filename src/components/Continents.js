@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 
 class Continents extends Component {
@@ -15,7 +13,6 @@ constructor(props){
 }
 
 activateTravel(e){
-    var versatile;
     for (var i=0; i < this.state.continentsarray.length; i++){
         if (e == this.state.continentsarray[i].continent){
             var tempobj = JSON.parse(JSON.stringify(this.state.continentsarray))
@@ -23,7 +20,6 @@ activateTravel(e){
             
             this.setState({continentsarray: tempobj})
             //versatile.continent = tempobj[i].continent
-            versatile = {continent: tempobj}
         }
     }
     console.log(tempobj)

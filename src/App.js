@@ -1,29 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header';
 import Continents from './components/Continents';
 import ComposePlace from './components/Compose';
 import ListView from './components/List';
-import About from './components/About';
-import Nav from './components/Nav';
-
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import ImageComp from './components/Imagecomponent';
-import { URLSearchParams } from 'url';
 import qs from 'qs';
-
-
-import image from './santiago.jpg';
-import image2 from './sany.jpg';
-import image3 from './sauckland.jpg';
-
-
-import { render } from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
 
 
 class App extends Component {
@@ -149,6 +131,16 @@ render(){
 
     let element;
     let destination;
+
+    let quantity = this.state.results.length;
+    let places;
+
+    if (this.state.results.length > 1){
+        places = " destinations"
+    } else if (places = 1) {
+        places = " destination"
+    }
+
     if(this.state.stype){
         element = <Continents sendcontinent = {this.sendcontinent} />;
     } else if(!this.state.stype){
@@ -160,12 +152,12 @@ render(){
         destination = null;
     }
 
-
+                    // This was below className = "App" <Header />
     return (
-            <div className="App">
-            <Header />
+            <div className = "App">
             
-                <div className = 'Content'>
+            
+                <div className = "Content">
 
                 <Button variant="outlined" color="primary" onClick = {this.searchType}>
                   Find by Continents
@@ -176,10 +168,12 @@ render(){
                 
                 <br/><br/>
                 {element}
-                {destination}<br/>
-                There should be data from the backend:
-                <ListView results = {this.state.results} />
+                {destination}
+                {quantity > 0 ? 'We have found ' + quantity + places : "We haven`t found matching results"}
                 
+
+                <ListView results = {this.state.results} />
+                    
                 </div>
 
             </div>

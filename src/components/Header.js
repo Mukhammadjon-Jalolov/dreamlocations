@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import logo from '../animated-globe.gif';
-import About from './About'
 
 export default function Header() {
   const [isNavVisible, setNavVisibility] = useState(false);
@@ -27,13 +25,17 @@ export default function Header() {
     }
   };
 
+  goHome = () => {
+
+  }
+
   const toggleNav = () => {
     setNavVisibility(!isNavVisible);
   };
 
   return (
     <header className="Header">
-      <img src={require("../logo.svg")} className="Logo" alt="logo" />
+      <img src={require("../logo.svg")} className="Logo" alt="logo"/>
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
@@ -43,8 +45,10 @@ export default function Header() {
         <nav className="Nav">
           <a href="/">Home</a>
           <a href="/">Sustainable Traveling</a>
-          <a href="/About">About</a>
+          <a href="/about">About</a>
         </nav>
+        
+      
       </CSSTransition>
       <button onClick={toggleNav} className="Burger">
         🍔

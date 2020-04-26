@@ -3,13 +3,14 @@
     top: 0; /* Stick it to the top */
     max-height: 70px;
     width: 100vw;
-  
     display: grid;
     grid-template-areas: "logo nav";
   
     /* Cosmetics */
-    background-color: #00521b;
+    background-color: rgb(129, 129, 129); /* #008a60;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* pointer-events: none; */
+    z-index: 3;
   }
   
   .Logo {
@@ -23,6 +24,7 @@
     grid-template-columns: repeat(4, auto);
     align-items: center;
     justify-items: center;
+    
   }
   .Nav a {
     color: #fff;
@@ -33,6 +35,7 @@
   }
   .Nav a:hover {
     transform: scale(1.1);
+    color: gold;
   }
   .Nav button {
     padding: 10px;
@@ -79,7 +82,7 @@
       grid-row-gap: 20px;
   
       padding: 30px 0 30px;
-      background: rgba(68, 124, 128, 0.95);
+      background: rgba(68, 124, 128, 1);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
