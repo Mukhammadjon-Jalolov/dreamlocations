@@ -4,8 +4,11 @@ import './App.css';
 import Continents from './components/Continents';
 import ComposePlace from './components/Compose';
 import ListView from './components/List';
+import Login from './components/Login';
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
+
+import {login} from './utils/JWTAuth.js';
 
 
 class App extends Component {
@@ -27,6 +30,8 @@ constructor(props){
     this.composeDestination = this.composeDestination.bind(this);
     this.sendcontinent = this.sendcontinent.bind(this);
     this.sendlandscape = this.sendlandscape.bind(this);
+    
+    this.login = this.login.bind(this);
 
     this.sendback = this.sendback.bind(this);
 
@@ -69,7 +74,7 @@ filterer(data){
         var resultsimg = JSON.parse(res[1])
         //this.setState({results:texts})
 
-        let tempresults = JSON.parse(JSON.stringify(this.state.results))
+        //let tempresults = JSON.parse(JSON.stringify(this.state.results))
 for (var i = 0; i < resultsimg.length; i++){
     var temptemparr = []
     var temptemp = {}
@@ -126,6 +131,14 @@ sendback(){
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
 }
 
+async login(){
+    let info = {
+        username: "usr",
+        password: "pwd"
+    };
+    await login(info)
+}
+
 render(){
 
 
@@ -159,6 +172,10 @@ render(){
             
                 <div className = "Content">
 
+                <Button variant="outlined" color="primary" onClick = {this.login}>
+                  LoginTest
+                </Button>
+                
                 <Button variant="outlined" color="primary" onClick = {this.searchType}>
                   Find by Continents
                 </Button>
@@ -171,7 +188,7 @@ render(){
                 {destination}
                 {quantity > 0 ? 'We have found ' + quantity + places : "We haven`t found matching results"}
                 
-
+                <Login />
                 <ListView results = {this.state.results} />
                     
                 </div>

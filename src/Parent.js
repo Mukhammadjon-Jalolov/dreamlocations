@@ -64,7 +64,7 @@ export default function MainComp() {
       </nav>
 
       </CSSTransition>
-      <img src = {require("./animated-globe.gif")} onClick = {toggleNav} className = "Burger" width = {60} height = {60}/>
+      <img src = {require("./animated-globe.gif")} onClick = {toggleNav} className = "Burger" width = {60} height = {60} alt = "nothing"/>
       </header>
 
                           <div>
