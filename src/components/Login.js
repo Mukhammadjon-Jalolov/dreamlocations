@@ -12,17 +12,20 @@ constructor(props){
     this.state = {
         username: '',
         password: '',
-        about: "Login here"
+        about: "Login to enable more functionalities"
     }
     this.username = this.username.bind(this);
+    this.password = this.password.bind(this);
 }
 
 username = (e) => {
     console.log(e.target.value)
+    this.setState({username : e.target.value})
 }
 
 password = (e) => {
     console.log(e.target.value )
+    this.setState({password: e.target.value})
 }
 
 render(){
@@ -43,7 +46,9 @@ render(){
                         onChange = {this.password.bind()}
                         />
                     <br/><br/>
-                    <Button variant="contained">Login</Button> <br/>
+                    <Button variant="contained">Login</Button> <br/><br/>
+                    or Register if not registered
+
                 </div>
             )
         }

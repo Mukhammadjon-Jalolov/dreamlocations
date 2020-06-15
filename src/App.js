@@ -5,6 +5,7 @@ import Continents from './components/Continents';
 import ComposePlace from './components/Compose';
 import ListView from './components/List';
 import Login from './components/Login';
+import Register from './components/Register';
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
 
@@ -188,7 +189,8 @@ render(){
                 {destination}
                 {quantity > 0 ? 'We have found ' + quantity + places : "We haven`t found matching results"}
                 
-                <Login />
+                <Login /> <br/>
+                <Register /> <br/>
                 <ListView results = {this.state.results} />
                     
                 </div>
