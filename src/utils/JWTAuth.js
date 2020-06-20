@@ -12,12 +12,13 @@ const login = async (data) => {
 					let jwt = response.data.jwt;
 					let expire_at = response.data.expireAt;
 					
-						localStorage.setItem("access_token", jwt);
-						localStorage.setItem("expire_at", expire_at);
-					}
+					localStorage.setItem("access_token", jwt);
+					localStorage.setItem("expire_at", expire_at);
+					
+				}
 			}
 			catch(e){
-
+				console.log("An Error occured while Login")
 			}
 	}
 export {login}
