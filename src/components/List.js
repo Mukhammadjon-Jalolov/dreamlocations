@@ -9,14 +9,18 @@ constructor(props){
     super(props);
     this.state = {
         source: 'data:image/jpeg; base64, ',
-        trueornot: true
+        Logged: false
     }
+}
+
+componentDidMount(){
+    console.log(this.props.name)
 }
 
 render(){
 
     const oneplace = this.props.results.map((result, index) => (
-    <div className = "Card" key = {index}> <h2>{result.name}  ({result.continent}) <Liked likedornot = {this.state.trueornot} place = {result.name}/> </h2>
+    <div className = "Card" key = {index}> <h2>{result.name}  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name}/> </h2>
         {result.description}
             <Gallery images = {result.images} margin = {2}/>
         </div>

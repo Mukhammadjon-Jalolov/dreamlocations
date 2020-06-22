@@ -5,6 +5,7 @@ class Liked extends Component {
 
 constructor(props){
     super(props);
+    
     this.state = {
         Logged: false
     }
@@ -15,7 +16,7 @@ constructor(props){
 
 componentDidMount(){
     let loggedmi = localStorage.getItem("LoggedIn")
-    this.setState({Logged: loggedmi})
+    this.setState({Logged: this.props.likedornot})
 }
 
 
