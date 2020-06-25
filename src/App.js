@@ -35,6 +35,7 @@ constructor(props){
     this.login = this.login.bind(this);
 
     this.sendback = this.sendback.bind(this);
+    this.toServer = this.toServer.bind(this);
 
 }
 
@@ -132,6 +133,26 @@ sendback(){
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
 }
 
+toServer(info) {
+    const url = "http://localhost/test.php"
+    console.log("So you liked " + info)
+    
+    axios.post(url, qs.stringify({liked: info}))
+    .then((response) => {
+        console.log(response)
+        if (response.data == "ok") {
+            let copystate = JSON.parse(JSON.stringify(this.state.results))
+            console.log("Received Approval!")
+            copystate.forEach(element => {
+                if (element.name == info){
+                    element.yoqtir = false
+                }
+            });
+            this.setState({results: copystate})
+        }
+    })
+}
+
 async login(){
     let info = {
         username: "usr",
@@ -191,7 +212,7 @@ render(){
                 
                 <Login /> <br/>
                 <Register /> <br/>
-                <ListView results = {this.state.results} />
+                <ListView results = {this.state.results} feedbacktoApp = {this.toServer}/>
                     
                 </div>
 
