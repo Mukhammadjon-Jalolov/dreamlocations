@@ -122,7 +122,7 @@ sendlandscape(versatile){
 
 
 sendback(){
-    const url = 'http://localhost/test.php'
+    const url = 'http://192.168.1.193/test.php'
 
     axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}))
             .then(response => response.data)
@@ -134,15 +134,27 @@ sendback(){
 }
 
 toServer(info) {
-    const url = "http://localhost/test.php"
+    const url = 'http://localhost/api/login.php'
     console.log("So you liked " + info)
+    let token = localStorage.getItem("access_token")
+    if(token){
+        console.log("You`re logged in! " + token)
+        //var authorization = {"Authorization" : 'Bearer ${token}'}
+    }
     
-    axios.post(url, qs.stringify({liked: info}))
+    /*
+    axios.post(url, qs.stringify({yoqdi: info}))
+    .then((response) => {
+        console.log(response)
+    })
+    */
+    
+    axios.post(url, qs.stringify({liked: info}), {headers: {"Authorization" : token}})
     .then((response) => {
         console.log(response)
         if (response.data == "ok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
-            console.log("Received Approval!")
+            //console.log("Received Approval!")
             copystate.forEach(element => {
                 if (element.name == info){
                     element.yoqtir = false
