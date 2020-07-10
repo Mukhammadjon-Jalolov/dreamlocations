@@ -19,16 +19,20 @@ if(isset($_POST['username'])){
 
 if(isset($_POST['password'])){
     $password = $_POST['password'];
+    $hashedpass = password_hash($password, PASSWORD_DEFAULT);
+    print_r($hashedpass);
 }
 
+$checkquery = "select Username from users where Username = '$username'";
 
-$rez = $conn->query("select * from users where Username = '$username' AND Password = '$password'");
+$rez = $conn->query($checkquery);
 
-if($rez){
+
+if($rez->num_rows){
     $resp = "Already Registered in our system";
     echo json_encode($resp);
 } else {
-    $query = "insert into users (Username, Password) VALUES ('$username', '$password')";
+    $query = "insert into users (Username, Password) VALUES ('$username', '$hashedpass')";
 
     $result = $conn->query($query);
     if($result){
