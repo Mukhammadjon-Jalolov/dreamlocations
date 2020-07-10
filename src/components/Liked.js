@@ -5,10 +5,6 @@ class Liked extends Component {
 
 constructor(props){
     super(props);
-    
-    this.state = {
-        Logged: ''
-    }
 
     this.sendLike = this.sendLike.bind(this);
     this.unsendLike = this.unsendLike.bind(this);
@@ -16,14 +12,12 @@ constructor(props){
 
 
 sendLike = () => {
-    console.log("Like image is " + this.props.place)
-    //this.setState({Logged: !this.state.Logged})
+    //console.log("Liked image is " + this.props.place) // 
     this.props.feedback(this.props.place)
 }
 
 unsendLike = () => {
     console.log("Not Like")
-    this.setState({Logged: !this.state.Logged})
 }
 
 
@@ -34,9 +28,9 @@ let icon;
 
 //if(this.props.likedornot) Oldin shunaqa edi Backendsiz
 if(this.props.likedornot){
-    icon = <img src = {require("../liked.png")} alt = "liked" height = "45px" onClick = {this.sendLike} />
+    icon = <img src = {require("../liked.png")} alt = "liked" height = "45px" onClick = {this.unsendLike} />
 } else {
-    icon = <img src = {require("../like.png")} alt = "like" height = "45px" onClick = {this.unsendLike}/>
+    icon = <img src = {require("../like.png")} alt = "like" height = "45px" onClick = {this.sendLike}/>
 }
 
         return(

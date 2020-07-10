@@ -32,32 +32,29 @@ constructor(props){
     this.sendcontinent = this.sendcontinent.bind(this);
     this.sendlandscape = this.sendlandscape.bind(this);
     
-    this.login = this.login.bind(this);
+    //this.login = this.login.bind(this);
 
     this.sendback = this.sendback.bind(this);
-    this.toServer = this.toServer.bind(this);
+    this.toserver = this.toserver.bind(this);
 
 }
 
 
 
 componentDidMount(){
-    const url = 'http://localhost/test.php'
+    const url = 'http://localhost/index.php'
 
-    axios.get(url, {crossDomain: true}).then(response => response.data)
-    .then((data) => {
+    //axios.get(url, {crossDomain: true}).then(response => response.data)
+    //.then((data) => {
         //console.log(data)
         //this.filterer(data)
-    })
+    //})
     /*    axios.get(url, {crossDomain: true}).then(response => response.data) //responseType: 'stream'
     .then(data => { // response
         var img = 'data:image/jpeg; base64, ' + data
         this.setState({source: img}); //source: response.data
         console.log(typeof data)  //response.data
     }); */
-
-
-
 }
 
 
@@ -123,8 +120,8 @@ sendlandscape(versatile){
 
 sendback(){
     const url = 'http://192.168.1.193/test.php'
-
-    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}))
+    let token = localStorage.getItem("access_token")
+    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}), {headers: {"Authorization" : token}})
             .then(response => response.data)
             .then((data) => {
             //console.log(data)     // IS LEFT FOR TESTING PURPOSES
@@ -133,31 +130,24 @@ sendback(){
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
 }
 
-toServer(info) {
-    const url = 'http://localhost/api/login.php'
-    console.log("So you liked " + info)
-    let token = localStorage.getItem("access_token")
-    if(token){
-        console.log("You`re logged in! " + token)
-        //var authorization = {"Authorization" : 'Bearer ${token}'}
+toserver(info) {
+    const url = 'http://localhost/api/liked.php'
+    //console.log("So you liked " + info)
+    if(localStorage.getItem("access_token")){
+        var token = localStorage.getItem("access_token")
+        var currentuser = localStorage.getItem("user")
     }
-    
-    /*
-    axios.post(url, qs.stringify({yoqdi: info}))
+
+    axios.post(url, qs.stringify({liked: info, user: currentuser}), {headers: {"Authorization" : token}})
     .then((response) => {
-        console.log(response)
-    })
-    */
-    
-    axios.post(url, qs.stringify({liked: info}), {headers: {"Authorization" : token}})
-    .then((response) => {
-        console.log(response)
+        console.log(response.data)
+        
         if (response.data == "ok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
             //console.log("Received Approval!")
             copystate.forEach(element => {
                 if (element.name == info){
-                    element.yoqtir = false
+                    element.yoqtir = true
                 }
             });
             this.setState({results: copystate})
@@ -165,13 +155,14 @@ toServer(info) {
     })
 }
 
+/*
 async login(){
     let info = {
         username: "usr",
         password: "pwd"
     };
     await login(info)
-}
+}*/
 
 render(){
 
@@ -224,7 +215,7 @@ render(){
                 
                 <Login /> <br/>
                 <Register /> <br/>
-                <ListView results = {this.state.results} feedbacktoApp = {this.toServer}/>
+                <ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
                     
                 </div>
 

@@ -33,6 +33,7 @@ password = (e) => {
 
 login(){
     const url = 'http://localhost/api/login.php'
+
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
         .then((response) => {
@@ -40,12 +41,35 @@ login(){
             if(response.data.jwt && response.data.expireAt){
                 let jwt = response.data.jwt;
                 let expire_at = response.data.expireAt;
+                let loggeduser = response.data.user;
                 localStorage.setItem("access_token", jwt);
                 localStorage.setItem("expire_at", expire_at);
                 localStorage.setItem("LoggedIn", true);
+                localStorage.setItem("user", loggeduser);
             }
         })
     }
+}
+
+logout(){
+    const url = 'http://localhost/api/logout.php'
+
+    if(localStorage.getItem("access_token")){
+        var token = localStorage.getItem("access_token")
+        var currentuser = localStorage.getItem("user")
+    }
+
+    axios.post(url, qs.stringify({user: currentuser}), {headers: {"Authorization" : token}})
+    .then((response) => {
+        
+        if (response.data == "ok") {
+            localStorage.removeItem("access_token")
+            localStorage.removeItem("user")
+            localStorage.removeItem("LoggedIn")
+            localStorage.removeItem("expire_at")
+            console.log("You have been logged out")
+        }
+    })
 }
 
 /*
@@ -78,6 +102,7 @@ render(){
                         />
                     <br/><br/>
                     <Button variant="contained" onClick = {this.login} >Login</Button> <br/><br/>
+                    <Button variant="contained" onClick = {this.logout} >Logout</Button><br/><br/>
                     or Register if not registered
                 </div>
             )

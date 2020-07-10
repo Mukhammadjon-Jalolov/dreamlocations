@@ -19,7 +19,6 @@ componentDidMount(){
 }
 
 sendtoApp = (data) => {
-    console.log("Hello")
     this.props.feedbacktoApp(data);
 }
 
