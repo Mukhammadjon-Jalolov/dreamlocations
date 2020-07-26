@@ -1,7 +1,7 @@
 <?php
 require_once "./api.php";
 require "../vendor/autoload.php";
-require_once "./login.php";
+require_once "./service.php";
 use \Firebase\JWT\JWT;
 
 header("Access-Control-Allow-Origin: *");
@@ -24,44 +24,74 @@ if(isset($_POST['liked'])){
             $userkey = $value;
         }
     }
-    $likedplace = $_POST['liked'];
-}
+$likedplace = $_POST['liked'];
 $likinguser = $_POST['user'];
+}
+/* THIS PART SHOULD BE MODIFIED. I.E. ONLY USERS EXISTING IN THE DATABASE WILL BE ABLE TO "LIKE" A PLACE 
+---------------------------------- OR HERE WILL BE AUTHORIZATION CHECKING SERVICE...-------------------- 
+if($_POST['user']){
+    $likinguser = $_POST['user'];
+} else {
+    http_response_code(403);
+    echo json_encode(array("message" => "You need to login first to use like feature!")); } */
+$services = new Loginservice();
+$services->logged($likinguser, $userkey, $conn);
 
-$query = "select favorites from userlikes where user = '$likinguser'";
-$result = mysqli_query($conn, $query);
-if($result->num_rows){
-    $row = $result->fetch_assoc();
-    $updatedfavs = $row['favorites'] . ", $likedplace";
+if($services->fedback()){
+    echo "we got true";
+} else {
+    echo "we got false";
 }
 
-$updatequery = "update userlikes set favorites = '$updatedfavs' where user = '$likinguser'";
-//$updatequery = "update userlikes set favorites = 'London, Boston' where user = '$likinguser'";
-$updateres = mysqli_query($conn, $updatequery);
-if($updateres->num_rows){
-    $newrow = $updateres->fetch_assoc();
+//THIS PART CHANGES A REQUEST BASED ON IF A USER LIKED FOR THE FIRST TIME OR NOT
+$usersliked = array();
+$likedbeforequery = "select user from userlikes";
+$likedbefore = mysqli_query($conn, $likedbeforequery);
+if($likedbefore->num_rows){
+    for ($i = 0; $i < $likedbefore->num_rows; $i++){
+        $theseliked = $likedbefore->fetch_assoc();
+        //echo $theseliked[user];
+        $usersliked[$i] = $theseliked[user];
+    }
 }
-
-http_response_code(200);
-echo $newrow['favorites'];
-$bool = reallogin();
-echo $bool;
-echo "ok";
-
-
-//Favorites. This function returns liked places of a user if any.
 /*
+if(in_array($likinguser, $usersliked)){
+    $query = "select favorites from userlikes where user = '$likinguser'";
+    $result = mysqli_query($conn, $query);
+    if($result->num_rows){
+        $row = $result->fetch_assoc();
 
-$result = mysqli_query($conn, $loginquery);
-	if($result){
-		http_response_code(200);
-		$natija = mysqli_fetch_assoc($result);
-		echo $natija['favorites'];
-	}
+            if (!strpos($row['favorites'], $likedplace) || strpos($row['favorites'], $likedplace) == 0){
+                $updatedfavs = $row['favorites'] . ", $likedplace";
+                $updateoradd = "update userlikes set favorites = '$updatedfavs' where user = '$likinguser'";
+                
+                //$updateoradd = "delete from userlikes"; //FOR DELETING ROWS FROM TABLE FOR EXPRIMENTS 
+                $updateres = mysqli_query($conn, $updateoradd);
+                if($updateres->num_rows){
+                    echo "ok";
+                }
+                //http_response_code(200);
+                echo "ok";
+            } else {
+                echo "You already liked this place!";
+            }
+    }
+    
+    //echo "ok"; //END OF FRAGMENT ======= END  ======= END ======= END ======= END ======= END ======= 
+}
+else {
+    //$updateoradd = "delete from userlikes"; Below likedplace is entered with space before because strpos function returns zero if string starts with some place name which we are searching for
+    $updateoradd = "insert into userlikes (user, favorites) values ('$likinguser', ' $likedplace')";
+    $updateres = mysqli_query($conn, $updateoradd);
+    if($updateres->num_rows){
+    http_response_code(200);
+    echo "ok";
+    }
+}
+*/
 
-getfavorites(){
-	//$natija = mysqli_fetch_assoc($result);
-	return $natija['favorites'];
-}*/
+//THE BELOW FRAGMENT EVALUATES IF A USER ALREADY LIKED A PLACE OR NOT. IF LIKED IT CANNOT BE ADDED AGAIN
+
+
 
 ?>
