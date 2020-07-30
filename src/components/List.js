@@ -12,6 +12,7 @@ constructor(props){
         Logged: false
     }
     this.sendtoApp = this.sendtoApp.bind(this);
+    this.sendtoAppnot = this.sendtoAppnot.bind(this);
 }
 
 componentDidMount(){
@@ -22,10 +23,14 @@ sendtoApp = (data) => {
     this.props.feedbacktoApp(data);
 }
 
+sendtoAppnot = (data, dislike) => {
+    this.props.feedbacktoApp(data, dislike);
+}
+
 render(){
 
     const oneplace = this.props.results.map((result, index) => (
-    <div className = "Card" key = {index}> <h2>{result.name}  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name} feedback = {this.sendtoApp}/> </h2>
+    <div className = "Card" key = {index}> <h2>{result.name}  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
         {result.description}
             <Gallery images = {result.images} margin = {2}/>
         </div>

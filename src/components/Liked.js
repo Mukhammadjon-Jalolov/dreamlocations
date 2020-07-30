@@ -10,14 +10,15 @@ constructor(props){
     this.unsendLike = this.unsendLike.bind(this);
 }
 
-
 sendLike = () => {
     //console.log("Liked image is " + this.props.place) // 
-    this.props.feedback(this.props.place)
+    this.props.yeslike(this.props.place)
 }
 
 unsendLike = () => {
-    console.log("Not Like")
+    var dislike = true
+    this.props.notlike(this.props.place, dislike)
+    //console.log("Not Like")
 }
 
 

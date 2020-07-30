@@ -119,9 +119,10 @@ sendlandscape(versatile){
 
 
 sendback(){
-    const url = 'http://192.168.1.193/test.php'
+    const url = 'http://localhost/test.php'
     let token = localStorage.getItem("access_token")
-    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend}), {headers: {"Authorization" : token}})
+    var currentuser = localStorage.getItem("user")
+    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
             .then(response => response.data)
             .then((data) => {
             //console.log(data)     // IS LEFT FOR TESTING PURPOSES
@@ -130,15 +131,15 @@ sendback(){
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
 }
 
-toserver(info) {
+toserver(data, notlike) {
     const url = 'http://localhost/api/liked.php'
     //console.log("So you liked " + info)
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
     }
-
-    axios.post(url, qs.stringify({liked: info, user: currentuser}), {headers: {"Authorization" : token}})
+    
+    axios.post(url, qs.stringify({liked: data, user: currentuser, dislike: notlike}), {headers: {"Authorization" : token}})
     .then((response) => {
         console.log(response.data)
         
@@ -146,7 +147,7 @@ toserver(info) {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
             //console.log("Received Approval!")
             copystate.forEach(element => {
-                if (element.name == info){
+                if (element.name == data){
                     element.yoqtir = true
                 }
             });
