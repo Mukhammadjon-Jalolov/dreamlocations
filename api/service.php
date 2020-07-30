@@ -17,7 +17,7 @@ class Loginservice {
 			return "database error";
 		}
 	}
-	
+
 	function fedback(){
 		if ($this->dbkey == $this->key){
 			return true;
@@ -25,6 +25,30 @@ class Loginservice {
 			return false;
 		}
 	}
+}
+
+class Likedservice {
+	private $currentplace = '';
+	private $fav = '';
+
+	function didlike($conn, $tempres, $userkey, $currentuser){
+		$this->currentplace = $tempres->name;
+		
+		$query = "select favorites from userlikes where user = '$currentuser'";
+		$result = mysqli_query($conn, $query);
+
+		if($result->num_rows){
+			$row = $result->fetch_assoc();
+			$this->fav = $row['favorites'];
+		}
+		
+		if(strpos($this->fav, $this->currentplace)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
 
 ?>

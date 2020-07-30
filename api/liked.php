@@ -27,21 +27,26 @@ if(isset($_POST['liked'])){
 $likedplace = $_POST['liked'];
 $likinguser = $_POST['user'];
 }
+
+if($_POST['dislike']){
+    Notlike($likedplace, $likinguser);
+}
+
 /* THIS PART SHOULD BE MODIFIED. I.E. ONLY USERS EXISTING IN THE DATABASE WILL BE ABLE TO "LIKE" A PLACE 
 ---------------------------------- OR HERE WILL BE AUTHORIZATION CHECKING SERVICE...-------------------- 
 if($_POST['user']){
     $likinguser = $_POST['user'];
 } else {
     http_response_code(403);
-    echo json_encode(array("message" => "You need to login first to use like feature!")); } */
+    echo json_encode(array("message" => "You need to login first to use like feature!")); }
+    
 $services = new Loginservice();
 $services->logged($likinguser, $userkey, $conn);
-
 if($services->fedback()){
     echo "we got true";
 } else {
     echo "we got false";
-}
+} */
 
 //THIS PART CHANGES A REQUEST BASED ON IF A USER LIKED FOR THE FIRST TIME OR NOT
 $usersliked = array();
@@ -51,22 +56,22 @@ if($likedbefore->num_rows){
     for ($i = 0; $i < $likedbefore->num_rows; $i++){
         $theseliked = $likedbefore->fetch_assoc();
         //echo $theseliked[user];
-        $usersliked[$i] = $theseliked[user];
+        $usersliked[$i] = $theseliked['user'];
     }
 }
-/*
+
 if(in_array($likinguser, $usersliked)){
     $query = "select favorites from userlikes where user = '$likinguser'";
     $result = mysqli_query($conn, $query);
-    if($result->num_rows){
+    if($result){
         $row = $result->fetch_assoc();
 
-            if (!strpos($row['favorites'], $likedplace) || strpos($row['favorites'], $likedplace) == 0){
+            if (!strpos($row['favorites'], $likedplace)){
                 $updatedfavs = $row['favorites'] . ", $likedplace";
-                $updateoradd = "update userlikes set favorites = '$updatedfavs' where user = '$likinguser'";
-                
-                //$updateoradd = "delete from userlikes"; //FOR DELETING ROWS FROM TABLE FOR EXPRIMENTS 
-                $updateres = mysqli_query($conn, $updateoradd);
+                $updating = "update userlikes set favorites = '$updatedfavs' where user = '$likinguser'";
+                //echo $updating;
+                //$updating = "delete from userlikes"; //FOR DELETING ROWS FROM TABLE FOR EXPRIMENTS 
+                $updateres = mysqli_query($conn, $updating);
                 if($updateres->num_rows){
                     echo "ok";
                 }
@@ -79,19 +84,21 @@ if(in_array($likinguser, $usersliked)){
     
     //echo "ok"; //END OF FRAGMENT ======= END  ======= END ======= END ======= END ======= END ======= 
 }
+//THE BELOW FRAGMENT EVALUATES IF A USER ALREADY LIKED A PLACE OR NOT. IF LIKED IT CANNOT BE ADDED AGAIN
 else {
-    //$updateoradd = "delete from userlikes"; Below likedplace is entered with space before because strpos function returns zero if string starts with some place name which we are searching for
-    $updateoradd = "insert into userlikes (user, favorites) values ('$likinguser', ' $likedplace')";
-    $updateres = mysqli_query($conn, $updateoradd);
-    if($updateres->num_rows){
-    http_response_code(200);
-    echo "ok";
+    //$adding = "delete from userlikes"; Below likedplace is entered with space before because strpos function returns zero if string starts with some place name which we are searching for
+    $adding = "insert into userlikes (user, favorites) values ('$likinguser', ' $likedplace')";
+    //echo $adding;
+    $result = mysqli_query($conn, $adding);
+    if($result){
+        //http_response_code(200);
+        echo "ok";
     }
 }
-*/
 
-//THE BELOW FRAGMENT EVALUATES IF A USER ALREADY LIKED A PLACE OR NOT. IF LIKED IT CANNOT BE ADDED AGAIN
-
+function Notlike($likedplace, $likinguser){
+    $notlikequery = "hi";
+}
 
 
 ?>
