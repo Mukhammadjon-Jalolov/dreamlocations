@@ -222,7 +222,6 @@ render(){
                 {destination}
                 {quantity > 0 ? 'We have found ' + quantity + places : "We haven`t found matching results"}
                 
-                <Login /> <br/>
                 <Register /> <br/>
                 <ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
                     

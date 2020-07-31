@@ -46,6 +46,7 @@ login(){
                 localStorage.setItem("expire_at", expire_at);
                 localStorage.setItem("LoggedIn", true);
                 localStorage.setItem("user", loggeduser);
+                window.location.replace("http://localhost:3000/");
             }
         })
     }
@@ -85,6 +86,8 @@ async login(){
 */
 render(){
     return (
+        <div className = "App">
+        <div className = "Content">
                 <div className = "Inside">
                     {this.state.about}
                     <br/><br/>
@@ -104,6 +107,8 @@ render(){
                     <Button variant="contained" onClick = {this.login} >Login</Button> <br/><br/>
                     <Button variant="contained" onClick = {this.logout} >Logout</Button><br/><br/>
                     or Register if not registered
+                </div>
+                </div>
                 </div>
             )
         }

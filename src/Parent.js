@@ -15,6 +15,8 @@ import App from './App'
 import Sustainable from "./components/Sustainable";
 import About from "./components/About";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Register from "./components/Register";
 
 export default function MainComp() {
 
@@ -42,7 +44,19 @@ export default function MainComp() {
   const toggleNav = () => {
     setNavVisibility(!isNavVisible);
   };
+  
+  var logg
+  var loggT
 
+  if(localStorage.getItem("access_token") && localStorage.getItem("LoggedIn")){
+    logg = "/logout"
+    loggT = "Logout"
+  } else {
+    logg = "/login"
+    loggT = "Login"
+  }
+  
+  
 
     return (
       <div className = "Allhere">
@@ -60,7 +74,9 @@ export default function MainComp() {
               <a href="/">Main</a>
               <a href="/sustainable">Sustainable Traveling</a>
               <a href="/about">About</a>
-              <a href="/login">Login</a>
+
+              <a href={logg}>{loggT}</a>
+
       </nav>
 
       </CSSTransition>
@@ -88,6 +104,12 @@ export default function MainComp() {
                                 </Route>
                                 <Route path="/login">
                                   <Login />
+                                </Route>
+                                <Route path="/register">
+                                  <Register />
+                                </Route>
+                                <Route path="/logout">
+                                  <Logout />
                                 </Route>
                               </Switch>
                             
