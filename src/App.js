@@ -152,6 +152,14 @@ toserver(data, notlike) {
                 }
             });
             this.setState({results: copystate})
+        } else if (response.data == "notok") {
+            let copystate = JSON.parse(JSON.stringify(this.state.results))
+            copystate.forEach(element => {
+                if (element.name == data){
+                    element.yoqtir = false
+                }
+            });
+            this.setState({results: copystate})
         }
     })
 }
