@@ -29,8 +29,12 @@ $likinguser = $_POST['user'];
 }
 
 if($_POST['dislike']){
-    Notlike($likedplace, $likinguser);
+    Notlike($likedplace, $likinguser, $conn);
+} else {
+    Likeit($likedplace, $likinguser, $conn);
 }
+
+function Likeit($likedplace, $likinguser, $conn){
 
 /* THIS PART SHOULD BE MODIFIED. I.E. ONLY USERS EXISTING IN THE DATABASE WILL BE ABLE TO "LIKE" A PLACE 
 ---------------------------------- OR HERE WILL BE AUTHORIZATION CHECKING SERVICE...-------------------- 
@@ -61,24 +65,26 @@ if($likedbefore->num_rows){
 }
 
 if(in_array($likinguser, $usersliked)){
+    //$updatedfavs = array();
     $query = "select favorites from userlikes where user = '$likinguser'";
     $result = mysqli_query($conn, $query);
     if($result){
         $row = $result->fetch_assoc();
 
-            if (!strpos($row['favorites'], $likedplace)){
+            if (strpos($row['favorites'], $likedplace) === false){
+                
                 $updatedfavs = $row['favorites'] . ", $likedplace";
                 $updating = "update userlikes set favorites = '$updatedfavs' where user = '$likinguser'";
                 //echo $updating;
                 //$updating = "delete from userlikes"; //FOR DELETING ROWS FROM TABLE FOR EXPRIMENTS 
                 $updateres = mysqli_query($conn, $updating);
-                if($updateres->num_rows){
+                if($updateres){
                     echo "ok";
                 }
                 //http_response_code(200);
-                echo "ok";
-            } else {
-                echo "You already liked this place!";
+            } else if (strpos($row['favorites'], $likedplace) >= 0){
+                //echo "You already liked this place!";
+                echo "You already liked it";
             }
     }
     
@@ -95,9 +101,26 @@ else {
         echo "ok";
     }
 }
+$conn->close();
+}
 
-function Notlike($likedplace, $likinguser){
-    $notlikequery = "hi";
+function Notlike($likedplace, $likinguser, $conn){
+    $notlikefirst = "select favorites from userlikes where user = '$likinguser'";
+    $result = mysqli_query($conn, $notlikefirst);
+    if($result){
+        $row = $result->fetch_assoc();
+    }
+    $temp = array_map("trim", explode(",", $row['favorites'])); // Create an array from string in a DB
+    $indexitem = array_search($likedplace, $temp);
+    array_splice($temp, $indexitem, 1); // Remove an item from the array
+    $newstr = implode(", ", $temp); // Create a string from the array
+    $updateafter = "update userlikes SET favorites = '$newstr' WHERE user = '$likinguser'";
+    //print_r($updateafter);
+    //$result = mysqli_query($conn, $updateafter);
+    if(mysqli_query($conn, $updateafter)){
+        echo "notok";
+    }
+    $conn->close();
 }
 
 
