@@ -16,7 +16,6 @@ import Sustainable from "./components/Sustainable";
 import About from "./components/About";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Register from "./components/Register";
 
 export default function MainComp() {
 
@@ -105,9 +104,7 @@ export default function MainComp() {
                                 <Route path="/login">
                                   <Login />
                                 </Route>
-                                <Route path="/register">
-                                  <Register />
-                                </Route>
+                                
                                 <Route path="/logout">
                                   <Logout />
                                 </Route>

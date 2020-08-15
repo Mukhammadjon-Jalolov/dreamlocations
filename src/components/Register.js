@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import qs from 'qs';
 
-class Login extends Component {
+class Register extends Component {
 
 constructor(props){
     super(props);
@@ -20,6 +20,7 @@ constructor(props){
     this.password = this.password.bind(this);
     this.passwordtwo = this.passwordtwo.bind(this);
     this.toregister = this.toregister.bind(this);
+    this.toggleComp = this.toggleComp.bind(this);
 }
 
 username = (e) => {
@@ -38,11 +39,15 @@ passwordtwo = (e) => {
 }
 
 toregister = () => {
-    const url = 'http://localhost/api/register.php'
+    const url = 'http://192.168.1.193/api/register.php'
     axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
     .then((response) => {
         console.log(response)
     })
+}
+
+toggleComp(){
+    this.props.toggLogin()
 }
 
 render(){
@@ -65,11 +70,11 @@ render(){
                         onChange = {this.passwordtwo.bind()}
                         /><br/><br/>
                     
-                    <Button variant="contained" onClick = {this.toregister} >Register</Button> <br/><br/> or Login if you have an account <br/>
+                    <Button variant="contained" onClick = {this.toregister} >Register</Button> <br/><br/> or <a href = '#' onClick = {this.toggleComp} >Login</a> if you have an account <br/>
 
                 </div>
             )
         }
 }
 
-export default Login;
+export default Register;

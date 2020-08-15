@@ -119,7 +119,7 @@ sendlandscape(versatile){
 
 
 sendback(){
-    const url = 'http://localhost/test.php'
+    const url = 'http://192.168.1.193/test.php'
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
     axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
@@ -132,7 +132,7 @@ sendback(){
 }
 
 toserver(data, notlike) {
-    const url = 'http://localhost/api/liked.php'
+    const url = 'http://192.168.1.193/api/liked.php'
     //console.log("So you liked " + info)
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
@@ -222,9 +222,8 @@ render(){
                 {destination}
                 {quantity > 0 ? 'We have found ' + quantity + places : "We haven`t found matching results"}
                 
-                <Register /> <br/>
                 <ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-                    
+                
                 </div>
 
             </div>

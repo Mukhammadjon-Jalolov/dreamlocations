@@ -6,12 +6,14 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import qs from 'qs';
 import {login} from '../utils/JWTAuth.js';
+import Register from './Register';
 
 class Login extends Component {
 
 constructor(props){
     super(props);
     this.state = {
+        logreg: true,
         username: '',
         password: '',
         about: "Login to enable more functionalities"
@@ -19,6 +21,7 @@ constructor(props){
     this.username = this.username.bind(this);
     this.password = this.password.bind(this);
     this.login = this.login.bind(this);
+    this.toggleEnter = this.toggleEnter.bind(this);
 }
 
 username = (e) => {
@@ -32,7 +35,7 @@ password = (e) => {
 }
 
 login(){
-    const url = 'http://localhost/api/login.php'
+    const url = 'http://192.168.1.193/api/login.php'
 
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
@@ -46,14 +49,14 @@ login(){
                 localStorage.setItem("expire_at", expire_at);
                 localStorage.setItem("LoggedIn", true);
                 localStorage.setItem("user", loggeduser);
-                window.location.replace("http://localhost:3000/");
+                window.location.replace("http://192.168.1.193:3000/");
             }
         })
     }
 }
 
 logout(){
-    const url = 'http://localhost/api/logout.php'
+    const url = 'http://192.168.1.193/api/logout.php'
 
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
@@ -73,6 +76,10 @@ logout(){
     })
 }
 
+toggleEnter(){
+    this.setState({logreg: !this.state.logreg})
+}
+
 /*
 async login(){
     if(this.state.username && this.state.password){
@@ -85,9 +92,9 @@ async login(){
 }
 */
 render(){
-    return (
-        <div className = "App">
-        <div className = "Content">
+    
+    let registerComp = <Register toggLogin = {this.toggleEnter}/>
+    let loginComp = (
                 <div className = "Inside">
                     {this.state.about}
                     <br/><br/>
@@ -105,13 +112,20 @@ render(){
                         />
                     <br/><br/>
                     <Button variant="contained" onClick = {this.login} >Login</Button> <br/><br/>
-                    <Button variant="contained" onClick = {this.logout} >Logout</Button><br/><br/>
-                    or Register if not registered
-                </div>
-                </div>
-                </div>
-            )
-        }
+                    or <a href = "#" onClick = {this.toggleEnter} >Register</a> if not registered
+            </div>
+    )
+
+    return (
+            <div className = "App">
+            <div className = "Content">
+
+            {this.state.logreg ? loginComp : registerComp}
+            </div>
+            </div>
+            
+        )
+    }
 }
 
 export default Login;
