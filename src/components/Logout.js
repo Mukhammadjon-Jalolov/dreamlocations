@@ -21,9 +21,10 @@ logout(){
         var currentuser = localStorage.getItem("user")
     }
 
-    axios.post(url, qs.stringify({user: currentuser}), {headers: {"Authorization" : token}})
+    //axios.post(url, qs.stringify({user: currentuser}), {headers: {"Authorization" : token}})
+    axios.post(url, qs.stringify({user: currentuser, Authorization: token}))
     .then((response) => {
-        
+
         if (response.data == "ok") {
             localStorage.removeItem("access_token")
             localStorage.removeItem("user")

@@ -42,7 +42,13 @@ toregister = () => {
     const url = 'http://192.168.1.193/api/register.php'
     axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
     .then((response) => {
-        console.log(response)
+        if(response.data == "ok"){
+            window.location.replace("http://192.168.1.193:3000/login")
+            console.log(response)
+        } else {
+            console.log(response)
+            console.log("Not approved")
+        }
     })
 }
 
