@@ -35,7 +35,7 @@ password = (e) => {
 }
 
 login(){
-    const url = 'http://192.168.1.193/api/login.php'
+    const url = 'http://localhost/api/login.php'
 
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
@@ -49,14 +49,14 @@ login(){
                 localStorage.setItem("expire_at", expire_at);
                 localStorage.setItem("LoggedIn", true);
                 localStorage.setItem("user", loggeduser);
-                window.location.replace("http://192.168.1.193:3000/");
+                window.location.replace("http://localhost:3000/");
             }
         })
     }
 }
 
 logout(){
-    const url = 'http://192.168.1.193/api/logout.php'
+    const url = 'http://localhost/api/logout.php'
 
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
@@ -123,7 +123,7 @@ render(){
             {this.state.logreg ? loginComp : registerComp}
             </div>
             </div>
-            
+
         )
     }
 }

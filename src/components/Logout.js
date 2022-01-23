@@ -14,7 +14,7 @@ componentDidMount(){
 }
 
 logout(){
-    const url = 'http://192.168.1.193/api/logout.php'
+    const url = 'http://localhost/api/logout.php'
 
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
@@ -31,13 +31,12 @@ logout(){
             localStorage.removeItem("LoggedIn")
             localStorage.removeItem("expire_at")
             console.log("You have been logged out")
-            window.location.replace("http://192.168.1.193:3000/");
+            window.location.replace("http://localhost:3000/");
         } else {
             console.log(response.data) // Any different responses are shown here
         }
     })
 }
-
 
 render(){
     return (

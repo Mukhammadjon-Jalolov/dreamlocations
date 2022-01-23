@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import '../App.css';
+import { withTranslation } from 'react-i18next';
 
 
 class Continents extends Component {
 
 constructor(props){
   super(props);
-    this.state = {selectedContinent: "",
-    continentsarray: [{continent: 'Europe', val: false}, {continent: 'Asia', val: false}, {continent: 'Africa', val: false}, {continent: 'North America', val: false}, {continent: 'South America', val: false}, {continent: 'Australia', val: false}]
-    }
+	const { t, i18n } = this.props;
+    this.state = {
+		selectedContinent: "",
+		continentsarray: []
+	}
     this.activateTravel = this.activateTravel.bind(this);
+}
+
+componentDidMount(){
+	const continentsarrayst = [{continent: 'description.Europe', landtype: "europe", val: false}, {continent: 'description.Asia', landtype: "europe", val: false}, {continent: 'description.Africa', landtype: "europe", val: false}, {continent: 'description.North_America', landtype: "europe", val: false}, {continent: 'description.South_America', landtype: "europe", val: false}, {continent: 'description.Australia_Oceania', landtype: "europe", val: false}]
+	
+	localStorage.getItem("continentsarraystorage") ? this.setState({continentsarray: JSON.parse(localStorage.getItem("continentsarraystorage"))}) : this.setState({continentsarray: continentsarrayst})
 }
 
 activateTravel(e){
@@ -27,17 +36,16 @@ activateTravel(e){
 }
 
 render(){
+	const { t, i18n } = this.props;
     return (
     <div>
-                {this.state.continentsarray.map((result, index) => (
-                    <input type = 'button' className = {result.val?'button':'button2'} value = {result.continent} onClick = {this.activateTravel.bind(this, result.continent)} />
-                ))}
-    
-
+			{this.state.continentsarray.map((result, index) => (
+				<input type = 'button' className = {result.val?'button':'button2'} value = {t(result.continent)} onClick = {this.activateTravel.bind(this, result.landtype)} />
+			))}
 
     </div>
             )
         }
 }
 
-export default Continents;
+export default withTranslation()(Continents);

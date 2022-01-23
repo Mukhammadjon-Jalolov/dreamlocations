@@ -15,11 +15,12 @@ constructor(props){
 
 render(){
     return (
-                <div className = "About">
-                <div className = "Inside">
-                    {this.state.about}
-                </div>
-                </div>
+	
+		<div className = "Sustainable">
+            <div className = "Inside">
+                {this.state.about}
+            </div>
+        </div>
             )
         }
 }

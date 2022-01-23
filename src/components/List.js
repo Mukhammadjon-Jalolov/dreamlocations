@@ -30,7 +30,7 @@ sendtoAppnot = (data, dislike) => {
 render(){
 
     const oneplace = this.props.results.map((result, index) => (
-    <div className = "Card" key = {index}> <h2>{result.name}  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
+    <div className = "Card" key = {index}> <h2>{result.name}   ({result.country})  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
         {result.description}
             <Gallery images = {result.images} margin = {2}/>
         </div>

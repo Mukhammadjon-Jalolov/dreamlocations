@@ -39,11 +39,11 @@ passwordtwo = (e) => {
 }
 
 toregister = () => {
-    const url = 'http://192.168.1.193/api/register.php'
+    const url = 'http://localhost/api/register.php'
     axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
     .then((response) => {
         if(response.data == "ok"){
-            window.location.replace("http://192.168.1.193:3000/login")
+            window.location.replace("http://localhost:3000/login")
             console.log(response)
         } else {
             console.log(response)
