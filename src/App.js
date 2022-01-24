@@ -9,14 +9,9 @@ import Register from './components/Register';
 import Favorites from './components/Favorites';
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
-
 import {login} from './utils/JWTAuth.js';
 import { withTranslation } from 'react-i18next';
 
-const lngs = {
-  en: { nativeName: 'English' },
-  de: { nativeName: 'Deutsch' }
-};
 
 class Application extends Component {
 
@@ -45,10 +40,7 @@ constructor(props){
 
     this.sendback = this.sendback.bind(this);
     this.toserver = this.toserver.bind(this);
-	
 }
-
-
 
 componentDidMount(){
     const url = 'http://localhost/index.php'
