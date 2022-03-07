@@ -24,8 +24,7 @@ const languages = [
   { code: 'gb', name: 'English'},
   { code: 'fr', name: 'French'},
   { code: 'de', name: 'Deutsch'},
-  { code: 'uz', name: 'Uzbek'},
-  { code: 'ru', name: 'Русский'}
+  { code: 'uz', name: 'Uzbek'}
 ]
 
 class LanguageSwitcherSelector extends Component {
