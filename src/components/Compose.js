@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../App.css';
+import '../Appp.scss';
 import { withTranslation } from 'react-i18next';
 
 class ComposePlace extends Component {
@@ -7,8 +7,8 @@ class ComposePlace extends Component {
 constructor(props){
     super(props);
 	const { t, i18n } = this.props;
-	
-    this.state = {selectedContinent: "",
+    this.state = {
+	selectedContinent: "",
     landscapesarray: []
     }
     this.activateTravel = this.activateTravel.bind(this);
@@ -19,12 +19,12 @@ componentDidMount(){
 	
 	localStorage.getItem("landscapesarraystorage") ? this.setState({landscapesarray: JSON.parse(localStorage.getItem("landscapesarraystorage"))}) : this.setState({landscapesarray: landscapesarrayst})
 }
-
+/*
 componentDidUpdate(prevProps){
 	if(this.props !== prevProps){
 		console.log("It happened!")
 	}
-}
+}*/
 
 activateTravel(e){
   var versatile;
@@ -35,12 +35,9 @@ activateTravel(e){
           
 		  localStorage.setItem("landscapesarraystorage", JSON.stringify(tempobj));
           this.setState({landscapesarray: tempobj})
-          //versatile.continent = tempobj[i].continent
-          versatile = {landscape: tempobj}
       }
   }
   console.log(tempobj)
-  console.log(this.state.landscapesarray)
   
   this.props.sendlandscape(tempobj); // bu yerda versatile bor edi
 }

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import '../App.css';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { withTranslation } from 'react-i18next';
 
 class Liked extends Component {
 
@@ -11,14 +14,20 @@ constructor(props){
 }
 
 sendLike = () => {
+	const { t, i18n } = this.props;
     //console.log("Liked image is " + this.props.place) // 
     this.props.yeslike(this.props.place)
+	if(!localStorage.getItem("LoggedIn")){
+		NotificationManager.warning(t('description.loginreminder'), t('description.logintolike'), 3000);
+	} else {
+		NotificationManager.success(t('description.savedtofavs'), this.props.place);
+	}
 }
 
 unsendLike = () => {
+	const { t, i18n } = this.props;
     var dislike = true
     this.props.notlike(this.props.place, dislike)
-    //console.log("Not Like")
 }
 
 
@@ -43,4 +52,4 @@ if(this.props.likedornot){
         }
 }
 
-export default Liked;
+export default withTranslation()(Liked);

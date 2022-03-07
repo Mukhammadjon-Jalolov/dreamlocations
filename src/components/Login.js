@@ -7,6 +7,8 @@ import axios from 'axios';
 import qs from 'qs';
 import {login} from '../utils/JWTAuth.js';
 import Register from './Register';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { withTranslation } from 'react-i18next';
 
 class Login extends Component {
 
@@ -15,8 +17,7 @@ constructor(props){
     this.state = {
         logreg: true,
         username: '',
-        password: '',
-        about: "Login to enable more functionalities"
+        password: ''
     }
     this.username = this.username.bind(this);
     this.password = this.password.bind(this);
@@ -92,11 +93,11 @@ async login(){
 }
 */
 render(){
-    
+    const { t, i18n } = this.props;
     let registerComp = <Register toggLogin = {this.toggleEnter}/>
     let loginComp = (
                 <div className = "Inside">
-                    {this.state.about}
+                    {t('description.morefunctions')}
                     <br/><br/>
                     <TextField id="outlined-basic" label="Username" variant="outlined"
                     onChange = {this.username.bind()}
@@ -111,21 +112,20 @@ render(){
                         onChange = {this.password.bind()}
                         />
                     <br/><br/>
-                    <Button variant="contained" onClick = {this.login} >Login</Button> <br/><br/>
-                    or <a href = "#" onClick = {this.toggleEnter} >Register</a> if not registered
+                    <Button variant="contained" onClick = {this.login} > {t('description.login')} </Button> <br/><br/>
+                   <a href = "#" onClick = {this.toggleEnter} > {t('description.register')} </a> {t('description.ifnotregistered')}
             </div>
     )
 
     return (
             <div className = "App">
-            <div className = "Content">
-
-            {this.state.logreg ? loginComp : registerComp}
-            </div>
+				<div className = "Content">
+					{this.state.logreg ? loginComp : registerComp}
+				</div>
             </div>
 
         )
     }
 }
 
-export default Login;
+export default withTranslation()(Login);

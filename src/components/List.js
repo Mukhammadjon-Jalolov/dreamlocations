@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import '../App.css';
+import '../Appp.scss';
 import Gallery from 'react-grid-gallery';
 import Liked from './Liked';
+import { withTranslation } from 'react-i18next';
 
 class ListView extends Component {
 
@@ -17,10 +18,12 @@ constructor(props){
 
 componentDidMount(){
     console.log(this.props.name)
+	
 }
 
 sendtoApp = (data) => {
     this.props.feedbacktoApp(data);
+	console.log(this.props.i18n.language)
 }
 
 sendtoAppnot = (data, dislike) => {
@@ -28,16 +31,19 @@ sendtoAppnot = (data, dislike) => {
 }
 
 render(){
-
+	const { t, i18n } = this.props;
     const oneplace = this.props.results.map((result, index) => (
-    <div className = "Card" key = {index}> <h2>{result.name}   ({result.country})  ({result.continent}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
-        {result.description}
-            <Gallery images = {result.images} margin = {2}/>
+    <div className = "Card" key = {index}> <h2>{result.name} ({ result.country.uz == undefined ? t('description.'+result.country.gb):result.country[this.props.i18n.language]}) ({t('description.'+result.continent)}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
+        <hr/>
+		{result.description[this.props.i18n.language]}
+			
+				<Gallery images = {result.images} margin = {2} maxRows = {1} />
+			
         </div>
     ))
     
         return(
-            <div>
+            <div className = "Results">
                 {oneplace}
             </div>
         )
@@ -45,4 +51,4 @@ render(){
         }
 }
 
-export default ListView;
+export default withTranslation()(ListView);

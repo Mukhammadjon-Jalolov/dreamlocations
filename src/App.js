@@ -1,17 +1,39 @@
 import React, {Component, Suspense } from 'react';
 import axios from 'axios';
-import './App.css';
+import './Appp.scss';
 import Continents from './components/Continents';
 import ComposePlace from './components/Compose';
 import ListView from './components/List';
 import Login from './components/Login';
 import Register from './components/Register';
 import Favorites from './components/Favorites';
+import Gallery from './components/ImgGallery';
+
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
 import {login} from './utils/JWTAuth.js';
 import { withTranslation } from 'react-i18next';
 
+import { render } from 'react-dom';
+
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+
+const images = [
+  {
+    original: 'https://picsum.photos/id/1018/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1018/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1015/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1015/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1019/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1019/250/150/',
+  },
+];
 
 class Application extends Component {
 
@@ -34,12 +56,10 @@ constructor(props){
     this.composeDestination = this.composeDestination.bind(this);
     this.sendcontinent = this.sendcontinent.bind(this);
     this.sendlandscape = this.sendlandscape.bind(this);
-    
-    this.login = this.login.bind(this);
-	this.login2 = this.login2.bind(this);
 
     this.sendback = this.sendback.bind(this);
     this.toserver = this.toserver.bind(this);
+	
 }
 
 componentDidMount(){
@@ -56,6 +76,16 @@ componentDidMount(){
         this.setState({source: img}); //source: response.data
         console.log(typeof data)  //response.data
     }); */
+}
+
+changeContentLang(lang){
+	let statecopy = JSON.parse(JSON.stringify(this.state.results))
+	for (var i = 0; i < statecopy.length; i++){
+		var temptextarr = statecopy[i].description.split("+")
+		var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
+		statecopy[i].description = translatedescription.lang
+	}
+	this.setState({results: statecopy})
 }
 
 handleChange (event, newValue) {
@@ -76,6 +106,17 @@ filterer(data){
         //this.setState({results:texts})
 
         //let tempresults = JSON.parse(JSON.stringify(this.state.results))
+
+for (var i = 0; i < texts.length; i++){
+	var til = localStorage.getItem("deflang")
+	var temptextarr = texts[i].description.split("+")
+	var tempcountrr = texts[i].country.split("+")
+	var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
+	var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
+	texts[i].description = translatedescription
+	texts[i].country = translatecountry
+}
+
 for (var i = 0; i < resultsimg.length; i++){
     var temptemparr = []
     var temptemp = {}
@@ -84,9 +125,16 @@ for (var i = 0; i < resultsimg.length; i++){
         temptemparr.push(temptemp)
     }
     texts[i].images = temptemparr
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
 }
         this.setState({results:texts})
+		console.log(this.state.results)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+		
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
     } else if(!data){
         this.setState({results:[]})		// If no data arrives, then it clears the results state and the screen gets empty
     }
@@ -94,6 +142,7 @@ for (var i = 0; i < resultsimg.length; i++){
 
 searchType(){
     this.setState({stype: !this.state.stype})
+	
 }
 
 composeDestination(){
@@ -102,10 +151,12 @@ composeDestination(){
 
 sendcontinent(versatile){
     this.setState({continentstosend: versatile, }, () => {this.sendback()})
+	//console.log(versatile)
 }
 
 sendlandscape(versatile){
     this.setState({landscapestosend: versatile, }, () => {this.sendback()})
+	console.log(versatile)
 }
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
@@ -117,6 +168,7 @@ sendback(){
     axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
             .then(response => response.data)
             .then((data) => {
+				console.log(data)
             this.filterer(data)	// We need to filter texts and images separately from received data
             })
 }
@@ -134,17 +186,17 @@ toserver(data, notlike) {
         // This part defines if the received place is liked or not. If it's a liked place, the heart icon becomes active
         if (response.data == "ok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
-            copystate.forEach(element => {
-                if (element.name == data){
-                    element.yoqtir = true
+            copystate.forEach(item => {
+                if (item.name == data){
+                    item.yoqtir = true
                 }
             });
             this.setState({results: copystate})
         } else if (response.data == "notok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
-            copystate.forEach(element => {
-                if (element.name == data){
-                    element.yoqtir = false
+            copystate.forEach(item => {
+                if (item.name == data){
+                    item.yoqtir = false
                 }
             });
             this.setState({results: copystate})	// The received updated places are then stored in a state called results
@@ -161,18 +213,30 @@ async login(){
     await login(info)
 }*/
 
-login(props){
-	const {t, i18n} = this.props;
-	i18n.changeLanguage('uz');
-}
-login2(props){
-	const {t, i18n} = this.props;
-	i18n.changeLanguage('en');
-}
+createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('Info message');
+          break;
+        case 'success':
+          NotificationManager.success('Success message', 'Title here');
+          break;
+        case 'warning':
+          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+    };
+  };
 
 render(){
 	
-    let element;
+    let continentcontainer;
     let destination;
 
     let quantity = this.state.results.length;
@@ -185,9 +249,9 @@ render(){
     }
 
     if(this.state.stype){
-        element = <Continents sendcontinent = {this.sendcontinent} />;
+        continentcontainer = <Continents sendcontinent = {this.sendcontinent} />;
     } else if(!this.state.stype){
-        element = null;
+        continentcontainer = null;
     }
 	
     if(this.state.destination){
@@ -200,32 +264,28 @@ render(){
 
     return (
             <div className = "App">
-                <div className = "Content">
 
-                {t('description.welcome')}
-				
-				<Button variant="outlined" color="primary" onClick = {this.login}>
-					{t('description.uzbek')}
-                </Button>
-				<Button variant="outlined" color="primary" onClick = {this.login2}>
-					{t('description.english')}
-                </Button>
-				
-                <Button variant="outlined" color="primary" onClick = {this.searchType}>
-					{t('description.continents')}
-                </Button>
-                <Button variant="outlined" color="primary" onClick = {this.composeDestination}>
-					{t('description.lands')}
-                </Button>
-                
-                <br/><br/>
-                {element}
-				{destination}
-				{quantity > 0 ? 'We have found ' + quantity + places : t('description.notfound') }
-				{this.state.receiving ? <h2> "Receiving data, wait!" </h2> : ""}
-                <ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-                
-                </div>
+						<div className = "Content">
+						<Button variant="outlined" color="primary" onClick = {this.searchType} >
+							{t('description.continents')}
+						</Button>
+						<Button variant="outlined" color="primary" onClick = {this.composeDestination}>
+							{t('description.lands')}
+						</Button>
+						
+						<hr/>
+						<br/><br/>
+						{continentcontainer}
+						{destination}
+						
+						<h3 style = {{color: "blue"}}> {quantity > 0 ?  quantity + t('description.found') : t('description.notfound') } </h3> 
+						{this.state.receiving ? <h2> "Receiving data, wait!" </h2> : ""}
+						
+						<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
+										
+										<NotificationContainer/>
+						</div>
+							
             </div>
             )
         }

@@ -5,6 +5,8 @@ import Liked from './Liked';
 import axios from 'axios';
 import qs from 'qs';
 import ListView from './List';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { withTranslation } from 'react-i18next';
 
 class Favorites extends Component {
 
@@ -68,6 +70,7 @@ for (var i = 0; i < resultsimg.length; i++){
 
 
 toserver(data, notlike) {
+	const { t, i18n } = this.props;
     const url = 'http://localhost/api/liked.php'
     //console.log("So you liked " + info)
     if(localStorage.getItem("access_token")){
@@ -79,16 +82,7 @@ toserver(data, notlike) {
     .then((response) => {
         console.log(response.data)
         
-        if (response.data == "ok") {
-            let copystate = JSON.parse(JSON.stringify(this.state.results))
-            //console.log("Received Approval!")
-            copystate.forEach(element => {
-                if (element.name == data){
-                    element.yoqtir = true
-                }
-            });
-            this.setState({results: copystate})
-        } else if (response.data == "notok") {
+        if (response.data == "notok") {
 			var i
             let copystate = JSON.parse(JSON.stringify(this.state.results))
             copystate.forEach(element => {
@@ -99,7 +93,9 @@ toserver(data, notlike) {
             });
 			copystate.splice(i, 1)
             this.setState({results: copystate})
+			NotificationManager.info(t('description.removefav'), data);
         }
+		
     })
 }
 
@@ -121,11 +117,11 @@ render(){
 					{"Sizning " + quantity + " yoqtirgan joylaringiz"}
 					
 					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-					
+					<NotificationContainer/>
 					</div>
 				</div>
 			)
         }
 }
 
-export default Favorites;
+export default withTranslation()(Favorites);

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../App.css';
 import { withTranslation } from 'react-i18next';
 
-
 class Continents extends Component {
 
 constructor(props){
@@ -16,9 +15,9 @@ constructor(props){
 }
 
 componentDidMount(){
-	const continentsarrayst = [{continent: 'description.Europe', landtype: "europe", val: false}, {continent: 'description.Asia', landtype: "europe", val: false}, {continent: 'description.Africa', landtype: "europe", val: false}, {continent: 'description.North_America', landtype: "europe", val: false}, {continent: 'description.South_America', landtype: "europe", val: false}, {continent: 'description.Australia_Oceania', landtype: "europe", val: false}]
+	const continentsarrayst = [{conttype: 'description.Europe', continent: "Europe", val: false}, {conttype: 'description.Asia', continent: "Asia", val: false}, {conttype: 'description.Africa', continent: "Africa", val: false}, {conttype: 'description.North_America', continent: "North_America", val: false}, {conttype: 'description.South_America', continent: "South_America", val: false}, {conttype: 'description.Australia_Oceania', continent: "Australia_Oceania", val: false}]
 	
-	localStorage.getItem("continentsarraystorage") ? this.setState({continentsarray: JSON.parse(localStorage.getItem("continentsarraystorage"))}) : this.setState({continentsarray: continentsarrayst})
+	localStorage.getItem("continentarraystorage") ? this.setState({continentsarray: JSON.parse(localStorage.getItem("continentarraystorage"))}) : this.setState({continentsarray: continentsarrayst})
 }
 
 activateTravel(e){
@@ -27,11 +26,12 @@ activateTravel(e){
             var tempobj = JSON.parse(JSON.stringify(this.state.continentsarray))
             tempobj[i].val = !tempobj[i].val
             
+			localStorage.setItem("continentarraystorage", JSON.stringify(tempobj));
             this.setState({continentsarray: tempobj})
-            //versatile.continent = tempobj[i].continent
+            //versatile.conttype = tempobj[i].conttype
         }
     }
-    console.log(tempobj)
+    //console.log(tempobj)
     this.props.sendcontinent(tempobj); // Bu yerda versatile bor edi
 }
 
@@ -40,7 +40,7 @@ render(){
     return (
     <div>
 			{this.state.continentsarray.map((result, index) => (
-				<input type = 'button' className = {result.val?'button':'button2'} value = {t(result.continent)} onClick = {this.activateTravel.bind(this, result.landtype)} />
+				<input type = 'button' className = {result.val?'button':'button2'} value = {t(result.conttype)} onClick = {this.activateTravel.bind(this, result.continent)} />
 			))}
 
     </div>
