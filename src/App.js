@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Favorites from './components/Favorites';
 import Gallery from './components/ImgGallery';
+import Spinnercha from './components/Spinnercha';
 
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
@@ -19,6 +20,9 @@ import { render } from 'react-dom';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const images = [
   {
@@ -34,6 +38,7 @@ const images = [
     thumbnail: 'https://picsum.photos/id/1019/250/150/',
   },
 ];
+
 
 class Application extends Component {
 
@@ -63,19 +68,23 @@ constructor(props){
 }
 
 componentDidMount(){
-    const url = 'http://localhost/index.php'
-
-    //axios.get(url, {crossDomain: true}).then(response => response.data)
-    //.then((data) => {
-        //console.log(data)
-        //this.filterer(data)
-    //})
-    /*    axios.get(url, {crossDomain: true}).then(response => response.data) //responseType: 'stream'
-    .then(data => { // response
-        var img = 'data:image/jpeg; base64, ' + data
-        this.setState({source: img}); //source: response.data
-        console.log(typeof data)  //response.data
-    }); */
+	const url = 'http://localhost/test.php'
+	
+	var nocontinents = JSON.parse(localStorage.getItem("continentarraystorage"))
+	var nolandscapes = JSON.parse(localStorage.getItem("landscapesarraystorage"))
+	
+	let token = localStorage.getItem("access_token")
+    var currentuser = localStorage.getItem("user")
+	if (nocontinents && nolandscapes) {
+		this.setState({receiving: true})
+		axios.post(url, qs.stringify({continent: nocontinents, landscape: nolandscapes, user: currentuser}), {headers: {"Authorization" : token}})
+		.then(response => response.data)
+		.then((data) => {
+		console.log(data)
+		this.filterer(data)	// We need to filter texts and images separately from received data
+		this.setState({receiving: false})
+		})
+	}
 }
 
 changeContentLang(lang){
@@ -130,6 +139,7 @@ for (var i = 0; i < resultsimg.length; i++){
 }
         this.setState({results:texts})
 		console.log(this.state.results)
+		console.log(this.state.continentstosend)
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 		
@@ -165,11 +175,15 @@ sendback(){
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
 	this.setState({receiving: true})
-    axios.post(url, qs.stringify({continent: this.state.continentstosend, landscape: this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
+	var nocontinents = JSON.parse(localStorage.getItem("continentarraystorage"))
+	var nolandscapes = JSON.parse(localStorage.getItem("landscapesarraystorage"))
+	
+    axios.post(url, qs.stringify({continent: localStorage.getItem("continentarraystorage") ? nocontinents : this.state.continentstosend, landscape: localStorage.getItem("landscapesarraystorage") ? nolandscapes : this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
             .then(response => response.data)
             .then((data) => {
 				console.log(data)
             this.filterer(data)	// We need to filter texts and images separately from received data
+			this.setState({receiving: false})
             })
 }
 
@@ -278,8 +292,12 @@ render(){
 						{continentcontainer}
 						{destination}
 						
-						<h3 style = {{color: "blue"}}> {quantity > 0 ?  quantity + t('description.found') : t('description.notfound') } </h3> 
-						{this.state.receiving ? <h2> "Receiving data, wait!" </h2> : ""}
+						<h3 style = {{color: "blue"}}> {quantity > 0 ? quantity + t('description.found') : "" } </h3>
+						<h3 style = {{color: "red"}}> {quantity > 0 ? "" : t('description.notfound')} </h3>
+						
+						{this.state.receiving ? <h2> {t('description.searching')} <Spinnercha /> </h2> : ""}
+
+						
 						
 						<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
 										

@@ -18,13 +18,11 @@ componentDidMount(){
 	const landscapesarrayst = [{landname: 'description.sea', landtype: "sea", val: false}, {landname: 'description.history', landtype: "history", val: false}, {landname: 'description.mountains', landtype: "mountains", val: false}, {landname: 'description.river', landtype: "river", val: false}, {landname: 'description.beach', landtype: "beach", val: false}, {landname: 'description.skyscrapers', landtype: "skyscrapers", val: false}, {landname: 'description.desert', landtype: "desert", val: false}];
 	
 	localStorage.getItem("landscapesarraystorage") ? this.setState({landscapesarray: JSON.parse(localStorage.getItem("landscapesarraystorage"))}) : this.setState({landscapesarray: landscapesarrayst})
+	
+	//this.props.sendlandscape(JSON.parse(localStorage.getItem("landscapesarraystorage")))
+	console.log(JSON.parse(localStorage.getItem("landscapesarraystorage")))
 }
-/*
-componentDidUpdate(prevProps){
-	if(this.props !== prevProps){
-		console.log("It happened!")
-	}
-}*/
+
 
 activateTravel(e){
   var versatile;

@@ -18,6 +18,9 @@ componentDidMount(){
 	const continentsarrayst = [{conttype: 'description.Europe', continent: "Europe", val: false}, {conttype: 'description.Asia', continent: "Asia", val: false}, {conttype: 'description.Africa', continent: "Africa", val: false}, {conttype: 'description.North_America', continent: "North_America", val: false}, {conttype: 'description.South_America', continent: "South_America", val: false}, {conttype: 'description.Australia_Oceania', continent: "Australia_Oceania", val: false}]
 	
 	localStorage.getItem("continentarraystorage") ? this.setState({continentsarray: JSON.parse(localStorage.getItem("continentarraystorage"))}) : this.setState({continentsarray: continentsarrayst})
+	
+	//this.props.sendcontinent(JSON.parse(localStorage.getItem("continentarraystorage")))
+	console.log(JSON.parse(localStorage.getItem("continentarraystorage")))
 }
 
 activateTravel(e){

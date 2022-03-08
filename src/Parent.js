@@ -11,6 +11,7 @@ import "./components/Header.css";
 import { CSSTransition } from "react-transition-group";
 import './Appp.scss';
 import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import App from './App'
 import Sustainable from "./components/Sustainable";
@@ -19,6 +20,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Favorites from "./components/Favorites";
 const { forwardRef, useRef, useImperativeHandle } = React;
+
 
 const languages = [
   { code: 'gb', name: 'English'},
@@ -38,7 +40,6 @@ class LanguageSwitcherSelector extends Component {
         return <li onClick={this.onChange}><div value={language.code} className={language.code} ></div></li>
       }
     });
-    
     return (
       <div className="lang">
         <div className={this.props.lang} > </div>
@@ -54,7 +55,8 @@ class LanguageSwitcherSelector extends Component {
 
 
 // --------------------------------------------------------------------------------------------------------------------
-function MainComp({ t, i18n }) {
+function MainComp() {
+  const { t, i18n } = useTranslation();
   
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -62,12 +64,18 @@ function MainComp({ t, i18n }) {
   const [isAdmin, CheckAdmin] = useState(false);
   const [LogOrNot, SetLogin] = useState('login');
   const [LogRoute, SetLogRoute] = useState("/login");
-  const [language, changeLanguageHandler] = useState(localStorage.getItem("deflang") || "en");
+  const [language, changeLanguageHandler] = useState(localStorage.getItem("deflang") || "gb");
+  
+  useEffect(() => {
+	  if (!localStorage.getItem("deflang")) {
+		  i18n.changeLanguage("gb")
+	  } else {console.log("language set")}
+  }, [language])
   
   const changeLanguage = (lang) => {
-	i18n.changeLanguage(lang);
     changeLanguageHandler(lang);
 	localStorage.setItem("deflang", lang);
+	i18n.changeLanguage(lang);
 	
 }
 
@@ -96,7 +104,6 @@ function MainComp({ t, i18n }) {
   };
 	
 	const testLogin = () => {
-		console.log(Logged);
 		if(localStorage.getItem("access_token") && localStorage.getItem("LoggedIn")){
 			SetLogin('logout');
 			SetLogRoute("/logout");
@@ -109,6 +116,7 @@ function MainComp({ t, i18n }) {
 	}
 
     return (
+	
       <div className = "Allhere">
       <header className="Header">
 	  

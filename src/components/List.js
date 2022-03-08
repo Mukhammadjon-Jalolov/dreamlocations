@@ -17,7 +17,6 @@ constructor(props){
 }
 
 componentDidMount(){
-    console.log(this.props.name)
 	
 }
 

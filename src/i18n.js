@@ -19,6 +19,7 @@ const resources = {
 		  lands: "Find by Landscape",
 		  found: " places found",
 		  notfound: "We haven`t found matching results",
+		  searching: "Searching...",
 		  
 		  Europe: "Europe",
 		  Asia: "Asia",
@@ -79,6 +80,7 @@ const resources = {
 		  lands: "Joyiga ko'ra top",
 		  found: " ta joy topildi",
 		  notfound: "Qidiruvga mos natijalar topilmadi",
+		  searching: "Qidirilyapti...",
 		  
 		  Europe: "Yevropa",
 		  Asia: "Osiyo",
@@ -139,6 +141,7 @@ const resources = {
 		  lands: "Suche nach Landschaft",
 		  found: " Orte gefunden",
 		  notfound: "Wir haben keine passenden Ergebnisse gefunden",
+		  searching: "Suchen...",
 		  
 		  Europe: "Europa",
 		  Asia: "Asien",
@@ -199,6 +202,7 @@ const resources = {
 		  lands: "Rechercher par paysage",
 		  found: " lieux trouvés",
 		  notfound: "Nous n'avons pas trouvé de résultats correspondants",
+		  searching: "Recherche...",
 		  
 		  Europe: "L'Europe",
 		  Asia: "Asie",
