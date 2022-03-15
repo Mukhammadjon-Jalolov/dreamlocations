@@ -54,6 +54,7 @@ constructor(props){
 		filteredplaces: {continent: {}, landscape: {}},
 		value:null,
 		receiving: false,
+		notfound: false,
 		landscapesarrayst: [{landname: 'description.sea', landtype: "sea", val: false}, {landname: 'description.history', landtype: "history", val: false}, {landname: 'description.mountains', landtype: "mountains", val: false}, {landname: 'description.river', landtype: "river", val: false}, {landname: 'description.beach', landtype: "beach", val: false}, {landname: 'description.skyscrapers', landtype: "skyscrapers", val: false}, {landname: 'description.desert', landtype: "desert", val: false}]
     };
 
@@ -112,9 +113,11 @@ filterer(data){
         var res = data.split("separatorplace")
         var texts = JSON.parse(res[0])
         var resultsimg = JSON.parse(res[1])
-        //this.setState({results:texts})
-
-        //let tempresults = JSON.parse(JSON.stringify(this.state.results))
+        
+		if(JSON.parse(res[0]).length){
+			this.setState({notfound: false})
+			console.log(JSON.parse(res[0]).length)
+		} else {this.setState({notfound: true})}
 
 for (var i = 0; i < texts.length; i++){
 	var til = localStorage.getItem("deflang")
@@ -171,10 +174,11 @@ sendlandscape(versatile){
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
 sendback(){
-    const url = 'http://localhost/test.php'
+    const url = 'http://192.168.43.193/test.php'
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
 	this.setState({receiving: true})
+	this.setState({notfound: false})
 	var nocontinents = JSON.parse(localStorage.getItem("continentarraystorage"))
 	var nolandscapes = JSON.parse(localStorage.getItem("landscapesarraystorage"))
 	
@@ -189,7 +193,7 @@ sendback(){
 
 // This part sends like and notlike requests to the server
 toserver(data, notlike) {
-    const url = 'http://localhost/api/liked.php'
+    const url = 'http://192.168.43.193/api/liked.php'
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
@@ -274,35 +278,39 @@ render(){
         destination = null;
     }
 	
+	
 	const { t, i18n } = this.props;
-
+	
+	console.log(this.state.landscapestosend)
+	console.log(this.state.continentstosend)
+	console.log(quantity)
+	
     return (
             <div className = "App">
 
-						<div className = "Content">
-						<Button variant="outlined" color="primary" onClick = {this.searchType} >
-							{t('description.continents')}
-						</Button>
-						<Button variant="outlined" color="primary" onClick = {this.composeDestination}>
-							{t('description.lands')}
-						</Button>
-						
-						<hr/>
-						<br/><br/>
-						{continentcontainer}
-						{destination}
-						
-						<h3 style = {{color: "blue"}}> {quantity > 0 ? quantity + t('description.found') : "" } </h3>
-						<h3 style = {{color: "red"}}> {quantity > 0 ? "" : t('description.notfound')} </h3>
-						
-						{this.state.receiving ? <h2> {t('description.searching')} <Spinnercha /> </h2> : ""}
+					<div className = "Content">
+					<Button variant="outlined" color="primary" onClick = {this.searchType} >
+						{t('description.continents')}
+					</Button>
+					<Button variant="outlined" color="primary" onClick = {this.composeDestination}>
+						{t('description.lands')}
+					</Button>
+					
+					<hr/>
+					<br/><br/>
+					{continentcontainer}
+					{destination}
+					
+					<h3 style = {{color: "blue"}}> {quantity > 0 ? quantity + t('description.found') : "" } </h3>
+					<h3 style = {{color: "red"}}> {this.state.notfound ? t("description.notfound") : ""} </h3>
+					
+					{this.state.receiving ? <h2> {t('description.searching')} <Spinnercha /> </h2> : ""}
 
-						
-						
-						<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-										
-										<NotificationContainer/>
-						</div>
+					
+					
+					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
+						<NotificationContainer/>
+					</div>
 							
             </div>
             )

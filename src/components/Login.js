@@ -17,7 +17,9 @@ constructor(props){
     this.state = {
         logreg: true,
         username: '',
-        password: ''
+        password: '',
+		passerr: '',
+		logerr: ''
     }
     this.username = this.username.bind(this);
     this.password = this.password.bind(this);
@@ -28,16 +30,18 @@ constructor(props){
 username = (e) => {
     console.log(e.target.value)
     this.setState({username : e.target.value})
+	this.setState({logerr : ""})
 }
 
 password = (e) => {
     console.log(e.target.value )
     this.setState({password: e.target.value})
+	this.setState({passerr: ""})
 }
 
 login(){
     const url = 'http://localhost/api/login.php'
-
+	const { t, i18n } = this.props;
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
         .then((response) => {
@@ -51,9 +55,21 @@ login(){
                 localStorage.setItem("LoggedIn", true);
                 localStorage.setItem("user", loggeduser);
                 window.location.replace("http://localhost:3000/");
-            }
+            } else if (response.data == "login failed"){
+				NotificationManager.error(t("description.incorrect"), t("description.incorrect2"));
+				this.setState({logerr: "error"})
+				this.setState({passerr: "error"})
+			}
         })
-    }
+    } else {
+		NotificationManager.error("Please fill the username and password");
+		if (!this.state.username) {
+			this.setState({logerr: "error"})
+		}
+		if (!this.state.password) {
+			this.setState({passerr: "error"})
+		}
+	}
 }
 
 logout(){
@@ -66,13 +82,14 @@ logout(){
 
     axios.post(url, qs.stringify({user: currentuser}), {headers: {"Authorization" : token}})
     .then((response) => {
-        
+		
         if (response.data == "ok") {
             localStorage.removeItem("access_token")
             localStorage.removeItem("user")
             localStorage.removeItem("LoggedIn")
             localStorage.removeItem("expire_at")
             console.log("You have been logged out")
+			
         }
     })
 }
@@ -99,21 +116,28 @@ render(){
                 <div className = "Inside">
                     {t('description.morefunctions')}
                     <br/><br/>
-                    <TextField id="outlined-basic" label="Username" variant="outlined"
-                    onChange = {this.username.bind()}
+                    <TextField
+						error={this.state.logerr}
+						id="outlined-basic" 
+						label={t('description.username')} 
+						variant="outlined"
+						onChange = {this.username.bind()}
                     />
                     <br/><br/>
                     <TextField
+						error={this.state.passerr}
                         id="outlined-password-input"
-                        label="Password"
+                        label={t('description.pass')}
                         type="password"
                         autoComplete="current-password"
                         variant="outlined"
                         onChange = {this.password.bind()}
                         />
                     <br/><br/>
+					
                     <Button variant="contained" onClick = {this.login} > {t('description.login')} </Button> <br/><br/>
                    <a href = "#" onClick = {this.toggleEnter} > {t('description.register')} </a> {t('description.ifnotregistered')}
+				   <NotificationContainer/>
             </div>
     )
 

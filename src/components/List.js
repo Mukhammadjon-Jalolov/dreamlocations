@@ -3,6 +3,8 @@ import '../Appp.scss';
 import Gallery from 'react-grid-gallery';
 import Liked from './Liked';
 import { withTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 class ListView extends Component {
 
@@ -10,7 +12,8 @@ constructor(props){
     super(props);
     this.state = {
         source: 'data:image/jpeg; base64, ',
-        Logged: false
+        Logged: false,
+		googlesearch: "http://www.google.com/search?q="
     }
     this.sendtoApp = this.sendtoApp.bind(this);
     this.sendtoAppnot = this.sendtoAppnot.bind(this);
@@ -37,7 +40,10 @@ render(){
 		{result.description[this.props.i18n.language]}
 			
 				<Gallery images = {result.images} margin = {2} maxRows = {1} />
-			
+				<br/>
+				<Button variant="contained" onClick = {this.login} href = {this.state.googlesearch+result.name} target = "_blank"> 
+					{t('description.more')}
+				</Button> <br/><br/>
         </div>
     ))
     

@@ -23,12 +23,10 @@ constructor(props){
 }
 
 componentDidMount(){
-    //console.log("Component Did Mount")
 	this.askfavorites();
 }
 
 askfavorites(){
-	//console.log("Hello from Favorites");
     const url = 'http://localhost/api/favorites.php';
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
@@ -43,12 +41,26 @@ askfavorites(){
 
 filterer(data){
     if(data){
+		this.setState({receiving: false})
         var res = data.split("separatorplace")
         var texts = JSON.parse(res[0])
         var resultsimg = JSON.parse(res[1])
-        //this.setState({results:texts})
+        
+		if(JSON.parse(res[0]).length){
+			this.setState({notfound: false})
+			console.log(JSON.parse(res[0]).length)
+		} else {this.setState({notfound: true})}
 
-        //let tempresults = JSON.parse(JSON.stringify(this.state.results))
+for (var i = 0; i < texts.length; i++){
+	var til = localStorage.getItem("deflang")
+	var temptextarr = texts[i].description.split("+")
+	var tempcountrr = texts[i].country.split("+")
+	var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
+	var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
+	texts[i].description = translatedescription
+	texts[i].country = translatecountry
+}
+
 for (var i = 0; i < resultsimg.length; i++){
     var temptemparr = []
     var temptemp = {}
@@ -57,14 +69,19 @@ for (var i = 0; i < resultsimg.length; i++){
         temptemparr.push(temptemp)
     }
     texts[i].images = temptemparr
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
 }
         this.setState({results:texts})
-        console.log(this.state.results)
-        //console.log(this.state.results[0].images)
-        //console.log(typeof this.state.results[0].images)
+		console.log(this.state.results)
+		console.log(this.state.continentstosend)
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+		
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
     } else if(!data){
-        this.setState({results:[]})
+        this.setState({results:[]})		// If no data arrives, then it clears the results state and the screen gets empty
     }
 }
 
@@ -104,7 +121,7 @@ removeFavorite(){
 }
 
 render(){
-	
+	const { t, i18n } = this.props;
 	let quantity = this.state.results.length;
 	
         return(
@@ -113,8 +130,7 @@ render(){
 					
 					<br/><br/>
 					
-					{"Here is your " + quantity + " favorite destinations"}
-					{"Sizning " + quantity + " yoqtirgan joylaringiz"}
+					{<h3 style = {{color: "blue"}}> {t('description.favoritesnumber')} {quantity} {t('description.favoritesnumber2')}</h3>}
 					
 					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
 					<NotificationContainer/>
