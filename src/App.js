@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Favorites from './components/Favorites';
 import Gallery from './components/ImgGallery';
+import CarouselGallery from './components/CarouselGallery';
 import Spinnercha from './components/Spinnercha';
 
 import Button from '@material-ui/core/Button';
@@ -23,6 +24,8 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+
+import ImageGallery from 'react-image-gallery';
 
 const images = [
   {
@@ -45,6 +48,7 @@ class Application extends Component {
 constructor(props){
     super(props);
     this.state = {
+		rasmlar: [],
 		stype: false,
 		destination: false,
 		results: [],
@@ -86,7 +90,26 @@ componentDidMount(){
 		this.setState({receiving: false})
 		})
 	}
+
+	const rasmarray = this.importAll(require.context('./assets', false, /\.(png|jpe?g|svg)$/));
+	this.setState({rasmlar: rasmarray})
+	//console.log(rasmarray)
 }
+
+importAll(r) {
+	let rasmlar = {};
+	let rasmarray = [];
+		r.keys().forEach((item, index) => {
+			var rasm = {}
+			//rasmlar[item.replace('./', '')] = r(item);
+			rasm.original = item
+			rasm.thumbnail = item
+			rasmarray.push(rasm)
+			//rasmlar = r(item)
+		});
+	return rasmarray
+}
+
 
 changeContentLang(lang){
 	let statecopy = JSON.parse(JSON.stringify(this.state.results))
@@ -309,7 +332,10 @@ render(){
 					
 					
 					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-						<NotificationContainer/>
+					
+					<NotificationContainer/>
+					<CarouselGallery/>
+					
 					</div>
 							
             </div>

@@ -17,6 +17,7 @@
     "react-circle-flags": "0.0.15",
     "react-dom": "^16.13.1",
     "react-full-page": "^0.1.12",
+    "react-gallery-carousel": "^0.2.9",
     "react-grid-gallery": "^0.5.5",
     "react-hot-toast": "^2.2.0",
     "react-i18next": "^11.15.3",

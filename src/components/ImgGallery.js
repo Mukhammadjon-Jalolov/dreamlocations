@@ -6,6 +6,8 @@ import './image-gallery.scss';
 
 const PREFIX_URL = 'https://raw.githubusercontent.com/xiaolin/react-image-gallery/master/static/';
 
+//https://www.npmjs.com/package/react-gallery-carousel
+
 class Gallery extends Component {
 
   constructor() {
@@ -27,13 +29,15 @@ class Gallery extends Component {
       thumbnailPosition: 'bottom',
       showVideo: {},
       useWindowKeyDown: true,
+	  
+	  rasmlar: []
     };
 
     this.images = [
       {
         thumbnail: `${PREFIX_URL}4v.jpg`,
         original: `${PREFIX_URL}4v.jpg`,
-        embedUrl: 'https://www.youtube.com/embed/4pSzhZ76GdM?autoplay=1&showinfo=0',
+        embedUrl: 'https://youtube.com/embed/oVUHwIuGE8g?autoplay=1',
         description: 'Render custom slides (such as videos)',
         renderItem: this._renderVideo.bind(this)
       },
@@ -45,8 +49,32 @@ class Gallery extends Component {
         description: 'Custom class for slides & thumbnails',
       },
     ].concat(this._getStaticImages());
+	
+	
   }
-
+	
+	
+	
+	componentDidMount(){
+		const rasmarray = this.importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/));
+		this.setState({rasmlar: rasmarray})
+		console.log(rasmarray)
+	}
+	
+	importAll(r) {
+	let rasmlar = {};
+	let rasmarray = [];
+		r.keys().forEach((item, index) => {
+			var rasm = {}
+			//rasmlar[item.replace('./', '')] = r(item);
+			rasm.original = '<img src = "../assets/'+item.replace('./', '')+'/>'
+			rasm.thumbnail = item
+			rasmarray.push(rasm)
+			//rasmlar = r(item)
+		});
+	return rasmarray
+	}
+	
   _onImageClick(event) {
     console.debug('clicked on image', event.target, 'at index', this._imageGallery.getCurrentIndex());
   }
@@ -126,6 +154,8 @@ class Gallery extends Component {
       }
     }
   }
+  
+  
 
   _renderVideo(item) {
     return (
@@ -172,8 +202,10 @@ class Gallery extends Component {
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}
+          //items={this.images}
           items={this.images}
-          onClick={this._onImageClick.bind(this)}
+		  
+		  onClick={this._onImageClick.bind(this)}
           onImageLoad={this._onImageLoad}
           onSlide={this._onSlide.bind(this)}
           onPause={this._onPause.bind(this)}
@@ -193,136 +225,14 @@ class Gallery extends Component {
           slideOnThumbnailOver={this.state.slideOnThumbnailOver}
           additionalClass="app-image-gallery"
           useWindowKeyDown={this.state.useWindowKeyDown}
+		  
+		  autoPlay="true"
+		  
         />
 
         <div className='app-sandbox'>
 
-          <div className='app-sandbox-content'>
-            <h2 className='app-header'>Settings</h2>
-
-            <ul className='app-buttons'>
-              <li>
-                <div className='app-interval-input-group'>
-                  <span className='app-interval-label'>Play Interval</span>
-                  <input
-                    className='app-interval-input'
-                    type='text'
-                    onChange={this._handleInputChange.bind(this, 'slideInterval')}
-                    value={this.state.slideInterval}/>
-                </div>
-              </li>
-
-              <li>
-                <div className='app-interval-input-group'>
-                  <span className='app-interval-label'>Slide Duration</span>
-                  <input
-                    className='app-interval-input'
-                    type='text'
-                    onChange={this._handleInputChange.bind(this, 'slideDuration')}
-                    value={this.state.slideDuration}/>
-                </div>
-              </li>
-
-              <li>
-                <div className='app-interval-input-group'>
-                  <span className='app-interval-label'>Thumbnail Bar Position</span>
-                  <select
-                    className='app-interval-input'
-                    value={this.state.thumbnailPosition}
-                    onChange={this._handleThumbnailPositionChange.bind(this)}
-                  >
-                    <option value='bottom'>Bottom</option>
-                    <option value='top'>Top</option>
-                    <option value='left'>Left</option>
-                    <option value='right'>Right</option>
-                  </select>
-                </div>
-              </li>
-            </ul>
-
-            <ul className='app-checkboxes'>
-              <li>
-                <input
-                  id='infinite'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'infinite')}
-                  checked={this.state.infinite}/>
-                  <label htmlFor='infinite'>allow infinite sliding</label>
-              </li>
-              <li>
-                <input
-                  id='show_fullscreen'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showFullscreenButton')}
-                  checked={this.state.showFullscreenButton}/>
-                  <label htmlFor='show_fullscreen'>show fullscreen button</label>
-              </li>
-              <li>
-                <input
-                  id='show_playbutton'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showPlayButton')}
-                  checked={this.state.showPlayButton}/>
-                  <label htmlFor='show_playbutton'>show play button</label>
-              </li>
-              <li>
-                <input
-                  id='show_bullets'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showBullets')}
-                  checked={this.state.showBullets}/>
-                  <label htmlFor='show_bullets'>show bullets</label>
-              </li>
-              <li>
-                <input
-                  id='show_thumbnails'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showThumbnails')}
-                  checked={this.state.showThumbnails}/>
-                  <label htmlFor='show_thumbnails'>show thumbnails</label>
-              </li>
-              <li>
-                <input
-                  id='show_navigation'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showNav')}
-                  checked={this.state.showNav}/>
-                  <label htmlFor='show_navigation'>show navigation</label>
-              </li>
-              <li>
-                <input
-                  id='show_index'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'showIndex')}
-                  checked={this.state.showIndex}/>
-                  <label htmlFor='show_index'>show index</label>
-              </li>
-              <li>
-                <input
-                  id='is_rtl'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'isRTL')}
-                  checked={this.state.isRTL}/>
-                  <label htmlFor='is_rtl'>is right to left</label>
-              </li>
-              <li>
-                <input
-                  id='slide_on_thumbnail_hover'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'slideOnThumbnailOver')}
-                  checked={this.state.slideOnThumbnailOver}/>
-                  <label htmlFor='slide_on_thumbnail_hover'>slide on mouse over thumbnails</label>
-              </li>
-              <li>
-                <input
-                  id='use_window_keydown'
-                  type='checkbox'
-                  onChange={this._handleCheckboxChange.bind(this, 'useWindowKeyDown')}
-                  checked={this.state.useWindowKeyDown}/>
-                  <label htmlFor='use_window_keydown'>use window keydown</label>
-              </li>
-            </ul>
-          </div>
+          
 
         </div>
       </section>
