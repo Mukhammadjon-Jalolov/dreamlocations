@@ -17,7 +17,7 @@ const resources = {
 		  
 		  continents: "Find by Continents",
 		  lands: "Find by Landscape",
-		  found: " places found",
+		  found: " places found!",
 		  notfound: "We haven`t found matching results",
 		  searching: "Searching...",
 		  
@@ -59,6 +59,11 @@ const resources = {
 		  registerfree: "Register here to create an account",
 		  ifhasaccount: " if you have an account",
 		  or: "or ",
+		  fillall: "Please fill all fields accordingly!",
+		  validemail: "Enter email address correctly!",
+		  senttoserver: "Registration details are sent to server",
+		  checkemail: "You can check you email", 
+		  checkemail2: "Confirmation link is sent",
 		  
 		  username: "Username",
 		  email: "Email",
@@ -75,7 +80,11 @@ const resources = {
 		  favoritesnumber: "You have ",
 		  favoritesnumber2: " favorite destinations!",
 		  
-		  sustainability: "The word “overtourism” is so new it does not yet appear in most dictionaries (although it was shortlisted as a Word of the Year in 2018). But the novelty of the term has not diminished the impact of its meaning: “An excessive number of tourist visits to a popular destination or attraction, resulting in damage to the local environment and historical sites and in poorer quality of life for residents,” according to the Oxford Dictionary shortlist. (Read more about how to turn overtourism into sustainable global tourism.) As travelers wake up, sometimes abruptly, to the challenges of joining some 1.4 billion other tourists to the world’s most enticing destinations, the threats—and consequences—of overtourism are becoming more visible each day. The UN World Tourism Organization, along with public and private sector partners, has declared September 27 as World Tourism Day and uses this platform to discuss tourism’s social, political, economic, and environmental impacts. This day highlights the importance of sustainable tourism—a framework for engaging travelers and the travel industry at large in supporting goals that include protecting the environment, addressing climate change, minimizing plastic consumption, and expanding economic development in communities affected by tourism. "
+		  howtouse: "This site allows you to find your ideal dream location to visit. You can find your dream travel site by continents or by selecting landscape types that you desire to be in the searched place. For example, if you need to find a place which is in Europe or Asia, and it must have skyscrapers, beach and is historical, you need to select both Europe and Asia from 'FIND BY CONTINENTS' and select skyscrapers, beach and historical buttons from 'FIND BY LANDSCAPE'. If there is such a place(s) with these requirements, you can like them to save in your account. Note that any place your look for may not be in our database",
+		  
+		  aboutme: "I'm Muxammadjon Jalolov, the creator of this site. I have a master's degree in Computer Science from the Lorraine University, France. Traveling in many places motivated me to create this site. I wanted to build a web service that can find traveling places as similar as your desired type. Sometimes people may not know about many wonderful destinations that are very close to us or we have never imagined such places to exist. Using this site helps people fill their travel wishlist and finding their dream travel location.",
+		  
+		  traveling: "The word “overtourism” is so new it does not yet appear in most dictionaries (although it was shortlisted as a Word of the Year in 2018). But the novelty of the term has not diminished the impact of its meaning: “An excessive number of tourist visits to a popular destination or attraction, resulting in damage to the local environment and historical sites and in poorer quality of life for residents,” according to the Oxford Dictionary shortlist. (Read more about how to turn overtourism into sustainable global tourism.) As travelers wake up, sometimes abruptly, to the challenges of joining some 1.4 billion other tourists to the world’s most enticing destinations, the threats—and consequences—of overtourism are becoming more visible each day. The UN World Tourism Organization, along with public and private sector partners, has declared September 27 as World Tourism Day and uses this platform to discuss tourism’s social, political, economic, and environmental impacts. This day highlights the importance of sustainable tourism—a framework for engaging travelers and the travel industry at large in supporting goals that include protecting the environment, addressing climate change, minimizing plastic consumption, and expanding economic development in communities affected by tourism. "
 	  }
     }
   },
@@ -90,7 +99,7 @@ const resources = {
 		  
 		  continents: "Qit'aga ko'ra top",
 		  lands: "Joyiga ko'ra top",
-		  found: " ta joy topildi",
+		  found: " ta joy topildi!",
 		  notfound: "Qidiruvga mos natijalar topilmadi",
 		  searching: "Qidirilyapti...",
 		  
@@ -132,6 +141,11 @@ const resources = {
 		  registerfree: "Akkaunt yaratish uchun bu yerda roʻyxatdan oʻting",
 		  ifhasaccount: " ga o'ting agar akkountingiz bo'lsa",
 		  or: "yoki ",
+		  fillall: "Iltimos, barcha maydonlarni mos ravishda to'ldiring!",
+		  validemail: "Elektron pochta manzilini to'g'ri kiriting!",
+		  senttoserver: "Ro'yxatdan o'tish tafsilotlari yuborildi",
+		  checkemail: "Elektron pochtangizni tekshirishingiz mumkin", 
+		  checkemail2: "Tasdiqlash havolasi yuborildi",
 		  
 		  username: "Akkount nomi",
 		  email: "Elektron pochta",
@@ -163,7 +177,7 @@ const resources = {
 		  
 		  continents: "Suche nach Kontinenten",
 		  lands: "Suche nach Landschaft",
-		  found: " Orte gefunden",
+		  found: " Orte gefunden!",
 		  notfound: "Wir haben keine passenden Ergebnisse gefunden",
 		  searching: "Suchen...",
 		  
@@ -205,6 +219,11 @@ const resources = {
 		  registerfree: "Registrieren Sie sich hier, um ein Konto zu erstellen",
 		  ifhasaccount: " wenn Sie ein Konto haben",
 		  or: "oder ",
+		  fillall: "Bitte füllen Sie alle Felder entsprechend aus!",
+		  validemail: "E-Mail-Adresse korrekt eingeben!",
+		  senttoserver: "Registrierungsdetails werden an den Server gesendet",
+		  checkemail: "Sie können Ihre E-Mail überprüfen", 
+		  checkemail2: "Bestätigungslink wird gesendet",
 		  
 		  username: "Nutzername",
 		  email: "Email",
@@ -236,7 +255,7 @@ const resources = {
 		  
 		  continents: "Rechercher par continents",
 		  lands: "Rechercher par paysage",
-		  found: " lieux trouvés",
+		  found: " lieux trouvés!",
 		  notfound: "Nous n'avons pas trouvé de résultats correspondants",
 		  searching: "Recherche...",
 		  
@@ -278,6 +297,11 @@ const resources = {
 		  registerfree: "Inscrivez-vous ici pour créer un compte",
 		  ifhasaccount: " si vous avez un compte",
 		  or: "ou ",
+		  fillall: "Remplissez tous les champs en conséquence!",
+		  validemail: "Saisissez correctement l'adresse e-mail!",
+		  senttoserver: "Les détails d'inscription sont envoyés au serveur",
+		  checkemail: "Vous pouvez vérifier votre e-mail", 
+		  checkemail2: "Le lien de confirmation est envoyé",
 		  
 		  username: "Nom d'utilisateur",
 		  email: "E-mail",

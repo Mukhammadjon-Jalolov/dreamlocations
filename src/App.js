@@ -10,6 +10,7 @@ import Favorites from './components/Favorites';
 import Gallery from './components/ImgGallery';
 import CarouselGallery from './components/CarouselGallery';
 import Spinnercha from './components/Spinnercha';
+import ScrollUpButton from "react-scroll-up-button";
 
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
@@ -183,6 +184,7 @@ searchType(){
 
 composeDestination(){
     this.setState({destination: !this.state.destination})
+	
 }
 
 sendcontinent(versatile){
@@ -320,22 +322,26 @@ render(){
 					</Button>
 					
 					<hr/>
-					<br/><br/>
-					{continentcontainer}
-					{destination}
-					
-					<h3 style = {{color: "blue"}}> {quantity > 0 ? quantity + t('description.found') : "" } </h3>
-					<h3 style = {{color: "red"}}> {this.state.notfound ? t("description.notfound") : ""} </h3>
-					
-					{this.state.receiving ? <h2> {t('description.searching')} <Spinnercha /> </h2> : ""}
-
-					
-					
-					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
-					
-					<NotificationContainer/>
-					<CarouselGallery/>
-					
+								<div className = "backgroundClass">
+									{continentcontainer}
+									{destination}
+									
+									<div className = "smallCard">
+										<h3 style = {{color: "black"}}> {quantity > 0 ? quantity + t('description.found') : "" } </h3>
+										<h3 style = {{color: "red"}}> {this.state.notfound ? t("description.notfound") : ""} </h3>
+									</div>
+									
+									{this.state.receiving ? <h2> {t('description.searching')} <Spinnercha /> </h2> : ""}
+									
+									<ListView results = {this.state.results} feedbacktoApp = {this.toserver} />
+									
+									{this.state.stype ? "" : <CarouselGallery/> }
+									
+									<NotificationContainer/>
+									
+									<ScrollUpButton />
+								</div>
+			
 					</div>
 							
             </div>

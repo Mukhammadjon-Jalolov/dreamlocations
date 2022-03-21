@@ -35,7 +35,7 @@ sendtoAppnot = (data, dislike) => {
 render(){
 	const { t, i18n } = this.props;
     const oneplace = this.props.results.map((result, index) => (
-    <div className = "Card" key = {index}> <h2>{result.name} ({ result.country.uz == undefined ? t('description.'+result.country.gb):result.country[this.props.i18n.language]}) ({t('description.'+result.continent)}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h2>
+    <div className = "Karta" key = {index}> <h3>{result.name} ({ result.country.uz == undefined ? t('description.'+result.country.gb):result.country[this.props.i18n.language]}) ({t('description.'+result.continent)}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h3>
         <hr/>
 		{result.description[this.props.i18n.language]}
 			

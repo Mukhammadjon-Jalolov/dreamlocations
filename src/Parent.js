@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import "./components/Header.css";
 import { CSSTransition } from "react-transition-group";
 import './Appp.scss';
+import './bootstrap.css';
 import { withTranslation } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +20,7 @@ import About from "./components/About";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Favorites from "./components/Favorites";
+import Footer from "./components/Footer";
 const { forwardRef, useRef, useImperativeHandle } = React;
 
 
@@ -203,9 +205,9 @@ function MainComp() {
 				  </Switch>
 				
 				</Router>
-			<div className = "footer">
-				Hello
-			</div>
+			
+				<Footer />
+			
 				
       </div>
     )

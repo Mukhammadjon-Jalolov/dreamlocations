@@ -15,7 +15,7 @@ render(){
     return (
         <div className = "Sustainable">
             <div className = "Inside">
-				{t('description.sustainability')}
+				{t('description.traveling')}
             </div>
         </div>
             )

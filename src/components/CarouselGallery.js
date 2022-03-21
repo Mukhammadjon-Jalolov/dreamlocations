@@ -4,7 +4,8 @@ import 'react-gallery-carousel/dist/index.css';
 import '../Appp.scss';
 
 const CarouselGallery = () => {
-  const rasmarray = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/));
+  const rasmarray = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
+  console.log(rasmarray)
 
   function importAll(r) {
 	let rasmlar = {};
