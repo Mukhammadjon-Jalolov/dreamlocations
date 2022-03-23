@@ -199,7 +199,7 @@ sendlandscape(versatile){
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
 sendback(){
-    const url = 'http://192.168.43.193/test.php'
+    const url = 'http://localhost/test.php'
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
 	this.setState({receiving: true})
@@ -218,7 +218,7 @@ sendback(){
 
 // This part sends like and notlike requests to the server
 toserver(data, notlike) {
-    const url = 'http://192.168.43.193/api/liked.php'
+    const url = 'http://localhost/api/liked.php'
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
@@ -306,10 +306,6 @@ render(){
 	
 	const { t, i18n } = this.props;
 	
-	console.log(this.state.landscapestosend)
-	console.log(this.state.continentstosend)
-	console.log(quantity)
-	
     return (
             <div className = "App">
 
@@ -335,7 +331,7 @@ render(){
 									
 									<ListView results = {this.state.results} feedbacktoApp = {this.toserver} />
 									
-									{this.state.stype ? "" : <CarouselGallery/> }
+									{(this.state.stype || this.state.destination || this.state.results.length > 0) ? "" : <CarouselGallery/> }
 									
 									<NotificationContainer/>
 									

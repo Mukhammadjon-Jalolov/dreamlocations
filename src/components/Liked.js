@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../App.css';
+import '../Appp.scss';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { withTranslation } from 'react-i18next';
@@ -40,7 +40,7 @@ let icon;
 if(this.props.likedornot){
     icon = <img src = {require("../liked.png")} alt = "liked" height = "45px" onClick = {this.unsendLike} />
 } else {
-    icon = <img src = {require("../like.png")} alt = "like" height = "45px" onClick = {this.sendLike}/>
+    icon = <img src = {require("../like.png")} alt = "like" height = "45px" onClick = {this.sendLike} />
 }
 
         return(

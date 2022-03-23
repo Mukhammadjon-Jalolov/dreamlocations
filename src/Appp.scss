@@ -95,12 +95,13 @@
 	padding: 0 20px;
 }
 
+
 .Sustainable {
   top: 0;
   position: relative;
   height: 100%;
   z-index: 3;
-  background-image: url(./assets/lake.jpg);
+  background-image: url(./assets/traveling.jpg);
   background-size: 100% auto;
   display: table;
 }
@@ -114,26 +115,12 @@
   border-width: medium;
   padding: 10px;
   width: 80%;
-  background-color: rgba(100, 100, 250, 0.9);
+  background-color: rgba(180, 180, 250, 0.9);
   margin: auto;
   word-wrap: break-word;
   text-align: justify;
   height: auto;
 }
-
-.About {
-  text-align: justify;
-  position: relative;
-  margin-top: 70px;
-  padding: 30px;
-  height: 100%;
-  width: auto;
-  background-color: mediumpurple;
-  z-index: -1;
-}
-
-
-
 
 .footer-dark {
   padding:20px 0;

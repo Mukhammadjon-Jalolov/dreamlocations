@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import "./components/Header.css";
 import { CSSTransition } from "react-transition-group";
 import './Appp.scss';
+import './Howto.scss';
 import './bootstrap.css';
 import { withTranslation } from 'react-i18next';
 import { useTranslation } from 'react-i18next';

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../App.css';
+import '../Howto.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { withTranslation } from 'react-i18next';
@@ -13,12 +13,12 @@ constructor(props){
 render(){
 	const { t, i18n } = this.props;
     return (
-		<div className = "Sustainable">
-            <div className = "Inside">
+		<div className = "How">
+            <div className = "Howinside">
                 {t('description.howtouse')}
             </div>
 			<br/>
-			<div className = "Inside">
+			<div className = "Howinside">
                 {t('description.aboutme')}
             </div>
         </div>

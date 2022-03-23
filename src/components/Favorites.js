@@ -33,7 +33,7 @@ askfavorites(){
     axios.post(url, qs.stringify({user: currentuser, test: "test"}), {headers: {"Authorization" : token}})
             .then(response => response.data)
 			.then((data) => {
-            //console.log(data)     // IS LEFT FOR TESTING PURPOSES
+            console.log(data)     // IS LEFT FOR TESTING PURPOSES
             this.filterer(data)
             })
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
@@ -128,10 +128,10 @@ render(){
 				<div className = "App">
 					<div className = "Content">
 					
-					<br/><br/>
-					
-					{<h3 style = {{color: "blue"}}> {t('description.favoritesnumber')} {quantity} {t('description.favoritesnumber2')}</h3>}
-					
+					<br/>
+					<div className = "smallCard">
+						{<h3 style = {{color: "blue"}}> {t('description.favoritesnumber')} {quantity} {t('description.favoritesnumber2')}</h3>}
+					</div>
 					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
 					<NotificationContainer/>
 					</div>

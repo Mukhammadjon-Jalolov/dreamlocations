@@ -37,7 +37,8 @@ render(){
     const oneplace = this.props.results.map((result, index) => (
     <div className = "Karta" key = {index}> <h3>{result.name} ({ result.country.uz == undefined ? t('description.'+result.country.gb):result.country[this.props.i18n.language]}) ({t('description.'+result.continent)}) <Liked likedornot = {result.yoqtir} place = {result.name} yeslike = {this.sendtoApp} notlike = {this.sendtoAppnot}/> </h3>
         <hr/>
-		{result.description[this.props.i18n.language]}
+		
+		{result.description.uz == undefined ? t('description.'+result.description.gb):result.description[this.props.i18n.language]}
 			
 				<Gallery images = {result.images} margin = {2} maxRows = {1} />
 				<br/>
