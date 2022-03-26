@@ -1,5 +1,5 @@
 import React, {Component, Suspense } from 'react';
-import View from 'react';
+//import View from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,8 +22,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Favorites from "./components/Favorites";
 import Footer from "./components/Footer";
-const { forwardRef, useRef, useImperativeHandle } = React;
-
+//const { forwardRef, useRef, useImperativeHandle } = React;
 
 const languages = [
   { code: 'gb', name: 'English'},
@@ -39,14 +38,14 @@ class LanguageSwitcherSelector extends Component {
   
   render() {
     const options = languages.map(language => {
-      if(language.code != this.props.lang){
+      if(language.code !== this.props.lang){
         return <li onClick={this.onChange}><div value={language.code} className={language.code} ></div></li>
       }
     });
     return (
       <div className="lang">
         <div className={this.props.lang} > </div>
-        <ul class="dropdown" >
+        <ul className="dropdown" >
           {options}
         </ul>
       </div>
@@ -64,7 +63,6 @@ function MainComp() {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [Logged, LoggedOrNot] = useState(false);
-  const [isAdmin, CheckAdmin] = useState(false);
   const [LogOrNot, SetLogin] = useState('login');
   const [LogRoute, SetLogRoute] = useState("/login");
   const [language, changeLanguageHandler] = useState(localStorage.getItem("deflang") || "gb");
@@ -111,7 +109,6 @@ function MainComp() {
 			SetLogin('logout');
 			SetLogRoute("/logout");
 			LoggedOrNot(true);
-			CheckAdmin("");
 		} else {
 		SetLogin('login');
 			SetLogRoute("/login");
@@ -123,7 +120,7 @@ function MainComp() {
       <div className = "Allhere">
       <header className="Header">
 	  
-      <img src={require("./logo.svg")} className = "Logo" alt="logo" />
+      <a href = "/"><img src={require("./logo.svg")} className = "Logo" alt="logo" /> </a>
 	  
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
@@ -169,9 +166,6 @@ function MainComp() {
 			  
 			  <Router>
 				  {/*
-				  
-				  {Logged && isAdmin && <a href="/statistics">{t('description.stats')}</a>}
-				  
 				  
 					A <Switch> looks through all its children <Route>
 					elements and renders the first one whose path

@@ -28,13 +28,11 @@ constructor(props){
 }
 
 username = (e) => {
-    console.log(e.target.value)
     this.setState({username : e.target.value})
 	this.setState({logerr : ""})
 }
 
 password = (e) => {
-    console.log(e.target.value )
     this.setState({password: e.target.value})
 	this.setState({passerr: ""})
 }
@@ -45,7 +43,7 @@ login(){
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
         .then((response) => {
-            console.log(response)
+            //console.log(response)
             if(response.data.jwt && response.data.expireAt){
                 let jwt = response.data.jwt;
                 let expire_at = response.data.expireAt;

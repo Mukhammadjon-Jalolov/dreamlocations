@@ -27,6 +27,7 @@ constructor(props){
 	this.email = this.email.bind(this);
     this.toregister = this.toregister.bind(this);
     this.toggleComp = this.toggleComp.bind(this);
+	this.clearspinner = this.clearspinner.bind(this);
 }
 
 username = (e) => {
@@ -47,9 +48,12 @@ passwordtwo = (e) => {
 }
 
 email = (e) => {
-	console.log(e.target.value)
 	this.setState({emailaddress: e.target.value})
 	this.setState({emailerr: ""})
+}
+
+clearspinner = (e) => {
+	this.setState({allsent: false})
 }
 
 toregister = () => {
@@ -57,7 +61,7 @@ toregister = () => {
 	const { t, i18n } = this.props;
 	var finalpass;
 	//NotificationManager.success(t('description.checkemail'), t('description.checkemail2'))
-	NotificationManager.warning('Warning message', 'Close after 3000ms', 15000);
+	
 	// Do something with email address. This part will send an account activation link to the email provided
 	// https://www.youtube.com/watch?v=7WANMTdxBws
 	// https://swiftmailer.symfony.com/docs/introduction.html
@@ -72,6 +76,7 @@ toregister = () => {
 					axios.post(url, qs.stringify({username: this.state.username, password: finalpass, email: this.state.emailaddress}))
 					.then((response) => {
 						//window.alert(t('description.senttoserver'))
+						//console.log(response)
 						if(response.data == "ok"){
 							NotificationManager.success(t('description.checkemail'), t('description.checkemail2'));
 							this.setState({allsent: false})
@@ -83,6 +88,10 @@ toregister = () => {
 						} else if (response.data == "Already Registered"){
 							console.log(response)
 							NotificationManager.error(t("description.tryothername"), t('description.alreadyreg'));
+							this.setState({allsent: false})
+						} else {
+							NotificationManager.error(response.data, t('description.wegotthis'));
+							this.setState({allsent: false})
 						}
 					})
 					

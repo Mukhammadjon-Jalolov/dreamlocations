@@ -22,26 +22,10 @@ import { render } from 'react-dom';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import ImageGallery from 'react-image-gallery';
-
-const images = [
-  {
-    original: 'https://picsum.photos/id/1018/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1018/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1015/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1015/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1019/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1019/250/150/',
-  },
-];
 
 
 class Application extends Component {
@@ -86,7 +70,6 @@ componentDidMount(){
 		axios.post(url, qs.stringify({continent: nocontinents, landscape: nolandscapes, user: currentuser}), {headers: {"Authorization" : token}})
 		.then(response => response.data)
 		.then((data) => {
-		console.log(data)
 		this.filterer(data)	// We need to filter texts and images separately from received data
 		this.setState({receiving: false})
 		})
@@ -140,17 +123,19 @@ filterer(data){
         
 		if(JSON.parse(res[0]).length){
 			this.setState({notfound: false})
-			console.log(JSON.parse(res[0]).length)
 		} else {this.setState({notfound: true})}
 
 for (var i = 0; i < texts.length; i++){
 	var til = localStorage.getItem("deflang")
 	var temptextarr = texts[i].description.split("+")
 	var tempcountrr = texts[i].country.split("+")
+	var tempnamearr = texts[i].name.split("+")
 	var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
 	var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
+	var translatename = {gb: tempnamearr[0], de: tempnamearr[1], fr: tempnamearr[2], uz: tempnamearr[3]}
 	texts[i].description = translatedescription
 	texts[i].country = translatecountry
+	texts[i].name = translatename
 }
 
 for (var i = 0; i < resultsimg.length; i++){
@@ -165,8 +150,7 @@ for (var i = 0; i < resultsimg.length; i++){
     //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
 }
         this.setState({results:texts})
-		console.log(this.state.results)
-		console.log(this.state.continentstosend)
+		
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 		
@@ -194,7 +178,6 @@ sendcontinent(versatile){
 
 sendlandscape(versatile){
     this.setState({landscapestosend: versatile, }, () => {this.sendback()})
-	console.log(versatile)
 }
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
@@ -210,7 +193,6 @@ sendback(){
     axios.post(url, qs.stringify({continent: localStorage.getItem("continentarraystorage") ? nocontinents : this.state.continentstosend, landscape: localStorage.getItem("landscapesarraystorage") ? nolandscapes : this.state.landscapestosend, user: currentuser}), {headers: {"Authorization" : token}})
             .then(response => response.data)
             .then((data) => {
-				console.log(data)
             this.filterer(data)	// We need to filter texts and images separately from received data
 			this.setState({receiving: false})
             })
@@ -310,12 +292,14 @@ render(){
             <div className = "App">
 
 					<div className = "Content">
-					<Button variant="outlined" color="primary" onClick = {this.searchType} >
+					<Button variant="contained" color="primary" onClick = {this.searchType} >
 						{t('description.continents')}
-					</Button>
-					<Button variant="outlined" color="primary" onClick = {this.composeDestination}>
+					</Button> &nbsp;
+					<Button variant="contained" color="primary" onClick = {this.composeDestination} >
 						{t('description.lands')}
 					</Button>
+					
+					
 					
 					<hr/>
 								<div className = "backgroundClass">

@@ -16,6 +16,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+
 }
 
 .App {
@@ -102,7 +103,7 @@
   height: 100%;
   z-index: 3;
   background-image: url(./assets/traveling.jpg);
-  background-size: 100% auto;
+  background-size: cover;
   display: table;
 }
 

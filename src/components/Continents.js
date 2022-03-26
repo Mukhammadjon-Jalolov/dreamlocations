@@ -20,7 +20,7 @@ componentDidMount(){
 	localStorage.getItem("continentarraystorage") ? this.setState({continentsarray: JSON.parse(localStorage.getItem("continentarraystorage"))}) : this.setState({continentsarray: continentsarrayst})
 	
 	//this.props.sendcontinent(JSON.parse(localStorage.getItem("continentarraystorage")))
-	console.log(JSON.parse(localStorage.getItem("continentarraystorage")))
+	//console.log(JSON.parse(localStorage.getItem("continentarraystorage")))
 }
 
 activateTravel(e){

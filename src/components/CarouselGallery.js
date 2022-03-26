@@ -5,7 +5,7 @@ import '../Appp.scss';
 
 const CarouselGallery = () => {
   const rasmarray = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
-  console.log(rasmarray)
+  //console.log(rasmarray)
 
   function importAll(r) {
 	let rasmlar = {};

@@ -10,7 +10,7 @@
     background-color: rgb(	0,139,139); /* #008a60;*/
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
     /* pointer-events: none; */
-    z-index: 2;
+    z-index: 3;
   }
   
   .Logo {

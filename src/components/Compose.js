@@ -15,12 +15,12 @@ constructor(props){
 }
 
 componentDidMount(){
-	const landscapesarrayst = [{landname: 'description.sea', landtype: "sea", val: false}, {landname: 'description.history', landtype: "history", val: false}, {landname: 'description.mountains', landtype: "mountains", val: false}, {landname: 'description.river', landtype: "river", val: false}, {landname: 'description.beach', landtype: "beach", val: false}, {landname: 'description.skyscrapers', landtype: "skyscrapers", val: false}, {landname: 'description.desert', landtype: "desert", val: false}];
+	const landscapesarrayst = [{landname: 'description.sea', landtype: "sea", val: false}, {landname: 'description.mountains', landtype: "mountains", val: false}, {landname: 'description.river', landtype: "river", val: false}, {landname: 'description.beach', landtype: "beach", val: false}, {landname: 'description.desert', landtype: "desert", val: false}, {landname: 'description.skyscrapers', landtype: "skyscrapers", val: false}, {landname: 'description.history', landtype: "history", val: false}, {landname: 'description.medieval', landtype: "medieval", val: false}, {landname: 'description.ancient', landtype: "ancient", val: false}];
 	
 	localStorage.getItem("landscapesarraystorage") ? this.setState({landscapesarray: JSON.parse(localStorage.getItem("landscapesarraystorage"))}) : this.setState({landscapesarray: landscapesarrayst})
 	
 	//this.props.sendlandscape(JSON.parse(localStorage.getItem("landscapesarraystorage")))
-	console.log(JSON.parse(localStorage.getItem("landscapesarraystorage")))
+	//console.log(JSON.parse(localStorage.getItem("landscapesarraystorage")))
 }
 
 
@@ -35,7 +35,6 @@ activateTravel(e){
           this.setState({landscapesarray: tempobj})
       }
   }
-  console.log(tempobj)
   
   this.props.sendlandscape(tempobj); // bu yerda versatile bor edi
 }
