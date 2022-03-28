@@ -12,7 +12,7 @@
     "base-64": "^0.1.0",
     "create-react-component-cli": "^1.4.0",
     "i18next": "^21.6.6",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-full-page": "^0.1.12",
