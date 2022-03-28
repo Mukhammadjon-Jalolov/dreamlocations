@@ -74,6 +74,7 @@ const resources = {
 		  mismatch: "The passwords do'nt match!",
 		  incorrect: "Incorrect Username or Password",
 		  incorrect2: "Error",
+		  pleasefill: "Please fill the username and password",
 		  
 		  loginreminder: "Reminder",
 		  logintolike: "Login first to like!",
@@ -95,7 +96,17 @@ const resources = {
 		  l3: "The research shows that even a few day long vacations have positive effects on well-being.",
 		  l4: "Travel exposes to new things. It describes that even by traveling to nearby places we experience new things",
 		  l5: "Travel can make us physically healthier. According to some studies traveling makes our brains and hearts healthier than others",
-		  l6: "Traveling can improve creativity. It is explained that experiences in foreign places increases cognitive flexibility and integrativeness of thought"
+		  l6: "Traveling can improve creativity. It is explained that experiences in foreign places increases cognitive flexibility and integrativeness of thought",
+		  
+		  travelinfo: "Travel destinations",
+		  topdestination: "Top destinations",
+		  remoteplaces: "Most remote places",
+		  inhabitedplaces: "Uninhabited places",
+		  contact: "Contact",
+		  partnership: "Partnership",
+		  feedback: "Feedback",
+		  aboutus: "About us",
+		  aboutus2: "This site allows you to find your dream travel location. Choosing continents and landscape types including urban areas, you can find ideal places you desire!"
 	  }
     }
   },
@@ -167,6 +178,7 @@ const resources = {
 		  mismatch: "Parollar bir biridan farq qiladi!",
 		  incorrect: "Login yoki Parol xato",
 		  incorrect2: "Xato",
+		  pleasefill: "Iltimos, foydalanuvchi nomi va parolni to'ldiring",
 		  
 		  loginreminder: "Eslatma",
 		  logintolike: "Saqlash uchun avval ro'yxatdan o'ting!",
@@ -188,7 +200,17 @@ const resources = {
 		  l3: "Tadqiqotlar shuni ko'rsatadiki, hatto bir necha kunlik ta'til ham xotirjamlikka ijobiy ta'sir ko'rsatadi.",
 		  l4: "Sayohat yangi narsalarni ochib beradi. Unda aytilishicha, hatto yaqin atrofdagi joylarga sayohat qilganimizda ham biz yangi narsalarni boshdan kechiramiz",
 		  l5: "Sayohat bizni jismonan sog'lom qiladi. Ba'zi tadqiqotlarga ko'ra, sayohat qilish bizning miyamiz va yuraklarimizni boshqalarga qaraganda sog'lomroq qiladi",
-		  l6: "Sayohat ijodkorlikni oshirishi mumkin. Chet ellardagi tajribalar kognitiv moslashuvchanlikni va fikrning integrativligini oshiradi"
+		  l6: "Sayohat ijodkorlikni oshirishi mumkin. Chet ellardagi tajribalar kognitiv moslashuvchanlikni va fikrning integrativligini oshiradi",
+		  
+		  travelinfo: "Sayohat manzillari",
+		  topdestination: "Eng mashxur yo'nalishlar",
+		  remoteplaces: "Eng chekka joylar",
+		  inhabitedplaces: "Kimsasiz joylar",
+		  contact: "Aloqa",
+		  partnership: "Hamkorlik",
+		  feedback: "Fikr-mulohaza",
+		  aboutus: "Biz haqimizda",
+		  aboutus2: "Bu sayt sizga orzu qilgan sayohat manzilingizni topish imkonini beradi. Qit'alar va landshaft turlarini, shu jumladan shaharlarni tanlab, siz o'zingiz xohlagan ideal joylarni topishingiz mumkin!"
 	  }
     }
   },
@@ -260,6 +282,7 @@ const resources = {
 		  mismatch: "Die Passwörter stimmen nicht überein!",
 		  incorrect: "Falscher Benutzername oder Passwort",
 		  incorrect2: "Fehler",
+		  pleasefill: "Bitte geben Sie den Benutzernamen und das Passwort ein",
 		  
 		  loginreminder: "Erinnerung",
 		  logintolike: "Melden Sie sich an, um zu speichern!",
@@ -281,7 +304,17 @@ const resources = {
 		  l3: "Die Forschung zeigt, dass bereits wenige Tage Urlaub positive Auswirkungen auf das Wohlbefinden haben.",
 		  l4: "Reisen setzt neue Dinge aus. Es beschreibt, dass wir selbst durch Reisen in nahe gelegene Orte neue Dinge erleben",
 		  l5: "Reisen kann uns körperlich gesünder machen. Einigen Studien zufolge macht Reisen unser Gehirn und Herz gesünder als andere",
-		  l6: "Reisen kann die Kreativität fördern. Es wird erklärt, dass Erfahrungen an fremden Orten die kognitive Flexibilität und die Integrationsfähigkeit des Denkens erhöhen"
+		  l6: "Reisen kann die Kreativität fördern. Es wird erklärt, dass Erfahrungen an fremden Orten die kognitive Flexibilität und die Integrationsfähigkeit des Denkens erhöhen",
+		  
+		  travelinfo: "Reiseziele",
+		  topdestination: "Top-Destinationen",
+		  remoteplaces: "Unbewohnte Orte",
+		  inhabitedplaces: "Bewohnte Orte",
+		  contact: "Kontakt",
+		  partnership: "Partnerschaft",
+		  feedback: "Feedback",
+		  aboutus: "Über uns",
+		  aboutus2: "Auf dieser Seite können Sie Ihren Traumreiseort finden. Wählen Sie Kontinente und Landschaftstypen einschließlich städtischer Gebiete aus und finden Sie die idealen Orte, die Sie sich wünschen!"
 	  }
     }
   },
@@ -353,6 +386,7 @@ const resources = {
 		  mismatch: "Les mots de passe ne correspondent pas!",
 		  incorrect: "Identifiant ou mot de passe incorrect",
 		  incorrect2: "Erreur",
+		  pleasefill: "Veuillez remplir le nom d'utilisateur et le mot de passe",
 		  
 		  loginreminder: "Rappel",
 		  logintolike: "Connectez-vous d'abord pour enregistrer",
@@ -374,7 +408,17 @@ const resources = {
 		  l3: "La recherche montre que même quelques jours de vacances ont des effets positifs sur le bien-être.",
 		  l4: "Les voyages exposent à de nouvelles choses. Il décrit que même en voyageant dans des endroits proches, nous expérimentons de nouvelles choses",
 		  l5: "Les voyages peuvent nous rendre physiquement plus sains. Selon certaines études, voyager rend nos cerveaux et nos cœurs plus sains que d'autres",
-		  l6: "Voyager peut améliorer la créativité. Il est expliqué que les expériences dans des lieux étrangers augmentent la flexibilité cognitive et l'intégration de la pensée"
+		  l6: "Voyager peut améliorer la créativité. Il est expliqué que les expériences dans des lieux étrangers augmentent la flexibilité cognitive et l'intégration de la pensée",
+		  
+		  travelinfo: "Destinations de voyage",
+		  topdestination: "Meilleures destinations",
+		  remoteplaces: "Les endroits les plus reculés",
+		  inhabitedplaces: "Lieux inhabités",
+		  contact: "Contact",
+		  partnership: "Partenariat",
+		  feedback: "Retour d'information",
+		  aboutus: "À propos de nous",
+		  aboutus2: "Ce site vous permet de trouver le lieu de voyage de vos rêves. En choisissant les continents et les types de paysages, y compris les zones urbaines, vous pouvez trouver les endroits idéaux que vous désirez!"
 	  }
     }
   }

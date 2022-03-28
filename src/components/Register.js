@@ -57,7 +57,7 @@ clearspinner = (e) => {
 }
 
 toregister = () => {
-    const url = 'http://localhost/api/register.php'
+    const url = 'http://dreamlocation.uz/api/register.php'
 	const { t, i18n } = this.props;
 	var finalpass;
 	//NotificationManager.success(t('description.checkemail'), t('description.checkemail2'))
@@ -81,7 +81,7 @@ toregister = () => {
 							NotificationManager.success(t('description.checkemail'), t('description.checkemail2'));
 							this.setState({allsent: false})
 								setTimeout(function(){
-									window.location.replace("http://localhost:3000/login")
+									window.location.replace("http://dreamlocation.uz/login")
 								}, 4000)
 					
 						console.log(response)

@@ -42,7 +42,7 @@ render(){
 			
 				<Gallery images = {result.images} margin = {2} maxRows = {1} />
 				<br/>
-				<Button variant="contained" onClick = {this.login} href = {this.state.googlesearch+result.name} target = "_blank"> 
+				<Button variant="contained" onClick = {this.login} href = {this.state.googlesearch+result.name.gb} target = "_blank"> 
 					{t('description.more')}
 				</Button> <br/><br/>
         </div>

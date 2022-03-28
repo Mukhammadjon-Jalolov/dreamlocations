@@ -27,7 +27,7 @@ componentDidMount(){
 }
 
 askfavorites(){
-    const url = 'http://localhost/api/favorites.php';
+    const url = 'http://dreamlocation.uz/api/favorites.php';
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
     axios.post(url, qs.stringify({user: currentuser, test: "test"}), {headers: {"Authorization" : token}})
@@ -88,7 +88,7 @@ for (var i = 0; i < resultsimg.length; i++){
 
 toserver(data, notlike) {
 	const { t, i18n } = this.props;
-    const url = 'http://localhost/api/liked.php'
+    const url = 'http://dreamlocation.uz/api/liked.php'
     //console.log("So you liked " + info)
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")

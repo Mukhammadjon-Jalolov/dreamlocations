@@ -38,7 +38,7 @@ password = (e) => {
 }
 
 login(){
-    const url = 'http://localhost/api/login.php'
+    const url = 'http://dreamlocation.uz/api/login.php'
 	const { t, i18n } = this.props;
     if(this.state.username && this.state.password){
         axios.post(url, qs.stringify({username: this.state.username, password: this.state.password}))
@@ -52,7 +52,7 @@ login(){
                 localStorage.setItem("expire_at", expire_at);
                 localStorage.setItem("LoggedIn", true);
                 localStorage.setItem("user", loggeduser);
-                window.location.replace("http://localhost:3000/");
+                window.location.replace("http://dreamlocation.uz/");
             } else if (response.data == "login failed"){
 				NotificationManager.error(t("description.incorrect"), t("description.incorrect2"));
 				this.setState({logerr: "error"})
@@ -60,7 +60,7 @@ login(){
 			}
         })
     } else {
-		NotificationManager.error("Please fill the username and password");
+		NotificationManager.error(t('description.pleasefill'));
 		if (!this.state.username) {
 			this.setState({logerr: "error"})
 		}
@@ -71,7 +71,7 @@ login(){
 }
 
 logout(){
-    const url = 'http://localhost/api/logout.php'
+    const url = 'http://dreamlocation.uz/api/logout.php'
 
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")

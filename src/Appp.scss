@@ -115,7 +115,7 @@
   border-color: lightslategrey;
   border-width: medium;
   padding: 10px;
-  width: 80%;
+  width: 90%;
   background-color: rgba(180, 180, 250, 0.9);
   margin: auto;
   word-wrap: break-word;
@@ -254,34 +254,37 @@
 }
 
 .uz {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cmask id='a'%3E%3Ccircle cx='256' cy='256' r='256' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath fill='%23d80027' d='m0 178 254.2-22L512 178v22.3l-40.2 54.1 40.2 57.3V334l-254 23.4L0 334v-22.3l36.7-59.4-36.7-52z'/%3E%3Cpath fill='%23338af3' d='M0 0h512v178H0z'/%3E%3Cpath fill='%23eee' d='M0 200.3h512v111.4H0z'/%3E%3Cpath fill='%236da544' d='M0 334h512v178H0z'/%3E%3Cpath fill='%23eee' d='M117.2 105.7a50 50 0 0 1 39.3-48.9 50.2 50.2 0 0 0-10.7-1.1 50 50 0 1 0 10.7 99c-22.5-5-39.3-25-39.3-49zm69 22.8 3.3 10.4h11l-9 6.5 3.5 10.4-9-6.4-8.7 6.4 3.4-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.4 10.4-8.8-6.4-9 6.4 3.5-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.4-8.8 6.4 3.4-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.4-8.8 6.4 3.4-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.4-8.8 6.4 3.4-10.4-8.8-6.5h11zm-105-36.4 3.4 10.4h11l-9 6.5 3.4 10.4-8.8-6.5-9 6.5 3.5-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.5-8.8 6.5 3.4-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.5-8.8 6.5 3.4-10.4-9-6.5h11zm35 0 3.4 10.4h11l-9 6.5 3.5 10.4-9-6.5-8.8 6.5 3.4-10.4-8.8-6.5h11zm-70-36.4 3.4 10.4h11l-9 6.4 3.6 10.5-9-6.5-8.8 6.5 3.4-10.5-9-6.4h11zm35 0 3.4 10.4h11l-9 6.4 3.6 10.5-9-6.5-8.8 6.5 3.4-10.5-9-6.4h11zm35 0 3.4 10.4h11l-9 6.4 3.6 10.5-9-6.5-8.8 6.5 3.4-10.5-8.8-6.4h11z'/%3E%3C/g%3E%3C/svg%3E");
-  width: 30px;
-  height: 30px;
+  background-image: url("https://flagcdn.com/36x27/uz.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
 }
 
 .gb {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cmask id='a'%3E%3Ccircle cx='256' cy='256' r='256' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath fill='%23eee' d='M0 0h47.4l76.4 21 65.4-21h33.4l34.2 16.6L289.4 0h33.4l70.4 22.8L464.8 0h15.8l12.2 7.3L512 0v47.3l-19.9 78 19.9 63.9v33.4l-16.4 30.6 16.4 36.2v33.4l-15.1 68.7 15.1 73.3v15.9l-7.8 10.9L512 512h-47.3l-71-17.5-70.9 17.5h-33.4l-30-19.7-36.8 19.7h-33.3l-63.7-20.2L47.3 512H31.4l-10.6-8L0 512v-47.3l22.8-79L0 322.9v-33.4l25.3-32L0 222.6v-33.4l22.2-64.6L0 47.2V31.4l8-7.8z'/%3E%3Cpath fill='%230052b4' d='m47.4 0 141.8 142V0H47.4zm275.4 0v142l142-142h-142zM0 47.2v142h142L0 47.2zm512 .1L370.1 189.2H512V47.3zM0 322.8v141.9l141.9-141.9H0zm370 0 142 142v-142H370zM189.3 370l-142 142h142V370zm133.5.1V512h141.9L322.8 370.1z'/%3E%3Cpath fill='%23d80027' d='M222.6 0v222.6H0v66.8h222.6V512h66.8V289.4H512v-66.8H289.4V0h-66.8z'/%3E%3Cpath fill='%23d80027' d='M0 0v31.4l157.7 157.8h31.5L0 0zm480.6 0L322.8 157.7v31.5L512 0h-31.4zM189.2 322.8 0 512h31.4l157.8-157.7v-31.5zm133.6 0L511.9 512h.1v-31.3L354.3 322.8h-31.5z'/%3E%3C/g%3E%3C/svg%3E");
-  width: 30px;
-  height: 30px;
+  background-image: url("https://flagcdn.com/36x27/gb.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
 }
 
 .fr {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cmask id='a'%3E%3Ccircle cx='256' cy='256' r='256' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath fill='%23eee' d='M167 0h178l25.9 252.3L345 512H167l-29.8-253.4z'/%3E%3Cpath fill='%230052b4' d='M0 0h167v512H0z'/%3E%3Cpath fill='%23d80027' d='M345 0h167v512H345z'/%3E%3C/g%3E%3C/svg%3E");
-  width: 30px;
-  height: 30px;
+  background-image: url("https://flagcdn.com/36x27/fr.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
 }
 
 .de{
-  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Cpath style='fill:%23FFDA44;' d='M15.923,345.043C52.094,442.527,145.929,512,256,512s203.906-69.473,240.077-166.957L256,322.783 L15.923,345.043z'/%3E%3Cpath d='M256,0C145.929,0,52.094,69.472,15.923,166.957L256,189.217l240.077-22.261C459.906,69.472,366.071,0,256,0z'/%3E%3Cpath style='fill:%23D80027;' d='M15.923,166.957C5.633,194.69,0,224.686,0,256s5.633,61.31,15.923,89.043h480.155 C506.368,317.31,512,287.314,512,256s-5.632-61.31-15.923-89.043H15.923z'/%3E%3C/svg%3E%0A");
-  width: 30px;
-  height: 30px;
+  background-image: url("https://flagcdn.com/36x27/de.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
 }
-
 
 
 
 .lang{
-  width: 40px;
+  width: 35px;
   text-align: center;
   position: relative;
   display: flex;
@@ -307,7 +310,7 @@
       display: block;
 	  margin: 0;
       padding: 5px 0 0 0;
-      div:hover{ width: 35px; height: 35px;
+      div:hover{ width: 40px; height: 30px;
       }
     }
   }

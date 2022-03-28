@@ -22,6 +22,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Favorites from "./components/Favorites";
 import Footer from "./components/Footer";
+
 //const { forwardRef, useRef, useImperativeHandle } = React;
 
 const languages = [
@@ -35,6 +36,8 @@ class LanguageSwitcherSelector extends Component {
   onChange = e =>{
     this.props.handleChangeLanguage(e.target.className);
   }
+  
+  
   
   render() {
     const options = languages.map(language => {
@@ -120,7 +123,7 @@ function MainComp() {
       <div className = "Allhere">
       <header className="Header">
 	  
-      <a href = "/"><img src={require("./logo.svg")} className = "Logo" alt="logo" /> </a>
+      <img src={require("./logo.svg")} className = "Logo" alt="logo" />
 	  
       <CSSTransition
         in={!isSmallScreen || isNavVisible}

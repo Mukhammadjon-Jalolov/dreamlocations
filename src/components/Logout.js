@@ -14,7 +14,7 @@ componentDidMount(){
 }
 
 logout(){
-    const url = 'http://localhost/api/logout.php'
+    const url = 'http://dreamlocation.uz/api/logout.php'
 
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
@@ -31,7 +31,7 @@ logout(){
             localStorage.removeItem("LoggedIn")
             localStorage.removeItem("expire_at")
             console.log("You have been logged out")
-            window.location.replace("http://localhost:3000/");
+            window.location.replace("http://dreamlocation.uz/");
         } else {
             console.log(response.data) // Any different responses are shown here
         }

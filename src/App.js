@@ -58,7 +58,7 @@ constructor(props){
 }
 
 componentDidMount(){
-	const url = 'http://localhost/test.php'
+	const url = 'http://dreamlocation.uz/test.php'
 	
 	var nocontinents = JSON.parse(localStorage.getItem("continentarraystorage"))
 	var nolandscapes = JSON.parse(localStorage.getItem("landscapesarraystorage"))
@@ -182,7 +182,7 @@ sendlandscape(versatile){
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
 sendback(){
-    const url = 'http://localhost/test.php'
+    const url = 'http://dreamlocation.uz/test.php'
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
 	this.setState({receiving: true})
@@ -200,7 +200,7 @@ sendback(){
 
 // This part sends like and notlike requests to the server
 toserver(data, notlike) {
-    const url = 'http://localhost/api/liked.php'
+    const url = 'http://dreamlocation.uz/api/liked.php'
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
@@ -229,35 +229,7 @@ toserver(data, notlike) {
     })
 }
 
-/*
-async login(){
-    let info = {
-        username: "usr",
-        password: "pwd"
-    };
-    await login(info)
-}*/
 
-createNotification = (type) => {
-    return () => {
-      switch (type) {
-        case 'info':
-          NotificationManager.info('Info message');
-          break;
-        case 'success':
-          NotificationManager.success('Success message', 'Title here');
-          break;
-        case 'warning':
-          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-          break;
-        case 'error':
-          NotificationManager.error('Error message', 'Click me!', 5000, () => {
-            alert('callback');
-          });
-          break;
-      }
-    };
-  };
 
 render(){
 	
