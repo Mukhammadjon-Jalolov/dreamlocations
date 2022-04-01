@@ -129,13 +129,10 @@ for (var i = 0; i < texts.length; i++){
 	var til = localStorage.getItem("deflang")
 	var temptextarr = texts[i].description.split("+")
 	var tempcountrr = texts[i].country.split("+")
-	var tempnamearr = texts[i].name.split("+")
 	var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
 	var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
-	var translatename = {gb: tempnamearr[0], de: tempnamearr[1], fr: tempnamearr[2], uz: tempnamearr[3]}
 	texts[i].description = translatedescription
 	texts[i].country = translatecountry
-	texts[i].name = translatename
 }
 
 for (var i = 0; i < resultsimg.length; i++){
@@ -150,10 +147,6 @@ for (var i = 0; i < resultsimg.length; i++){
     //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
 }
         this.setState({results:texts})
-		
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
-		
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
     } else if(!data){
@@ -199,20 +192,21 @@ sendback(){
 }
 
 // This part sends like and notlike requests to the server
-toserver(data, notlike) {
+toserver(likedplace, notlike) {
     const url = 'http://dreamlocation.uz/api/liked.php'
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
     }
     
-    axios.post(url, qs.stringify({liked: data, user: currentuser, dislike: notlike}), {headers: {"Authorization" : token}})
+    axios.post(url, qs.stringify({liked: likedplace, user: currentuser, dislike: notlike}), {headers: {"Authorization" : token}})
     .then((response) => {
         // This part defines if the received place is liked or not. If it's a liked place, the heart icon becomes active
         if (response.data == "ok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
             copystate.forEach(item => {
-                if (item.name == data){
+				//console.log(item.name)
+                if (item.name == likedplace){
                     item.yoqtir = true
                 }
             });
@@ -220,7 +214,7 @@ toserver(data, notlike) {
         } else if (response.data == "notok") {
             let copystate = JSON.parse(JSON.stringify(this.state.results))
             copystate.forEach(item => {
-                if (item.name == data){
+                if (item.name == likedplace){
                     item.yoqtir = false
                 }
             });

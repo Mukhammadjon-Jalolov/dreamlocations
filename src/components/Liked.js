@@ -15,12 +15,11 @@ constructor(props){
 
 sendLike = () => {
 	const { t, i18n } = this.props;
-    //console.log("Liked image is " + this.props.place) // 
     this.props.yeslike(this.props.place)
 	if(!localStorage.getItem("LoggedIn")){
 		NotificationManager.warning(t('description.loginreminder'), t('description.logintolike'), 3000);
 	} else {
-		NotificationManager.success(t('description.savedtofavs'), this.props.place);
+		NotificationManager.success(t('description.savedtofavs'), this.props.place[this.props.i18n.language]);
 	}
 }
 

@@ -7,6 +7,7 @@ import qs from 'qs';
 import ListView from './List';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { withTranslation } from 'react-i18next';
+import Spinnercha from './Spinnerchasmall';
 
 class Favorites extends Component {
 
@@ -14,6 +15,7 @@ constructor(props){
     super(props);
 	this.state = {
 		results: [],
+		anyfavs: false,
 		source: 'data:image/jpeg; base64, '
 	}
 	this.askfavorites = this.askfavorites.bind(this);
@@ -24,6 +26,7 @@ constructor(props){
 
 componentDidMount(){
 	this.askfavorites();
+	this.setState({anyfavs: true})
 }
 
 askfavorites(){
@@ -33,7 +36,7 @@ askfavorites(){
     axios.post(url, qs.stringify({user: currentuser, test: "test"}), {headers: {"Authorization" : token}})
             .then(response => response.data)
 			.then((data) => {
-            console.log(data)     // IS LEFT FOR TESTING PURPOSES
+            //console.log(data)     // IS LEFT FOR TESTING PURPOSES
             this.filterer(data)
             })
     //console.log(this.state.continentstosend) // IS LEFT FOR TESTING PURPOSES 
@@ -41,7 +44,7 @@ askfavorites(){
 
 filterer(data){
     if(data){
-		this.setState({receiving: false})
+		this.setState({anyfavs: false})
         var res = data.split("separatorplace")
         var texts = JSON.parse(res[0])
         var resultsimg = JSON.parse(res[1])
@@ -70,13 +73,8 @@ for (var i = 0; i < resultsimg.length; i++){
     }
     texts[i].images = temptemparr
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
 }
         this.setState({results:texts})
-		console.log(this.state.results)
-		console.log(this.state.continentstosend)
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
 		
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
@@ -97,8 +95,7 @@ toserver(data, notlike) {
     
     axios.post(url, qs.stringify({liked: data, user: currentuser, dislike: notlike}), {headers: {"Authorization" : token}})
     .then((response) => {
-        console.log(response.data)
-        
+		console.log(response)
         if (response.data == "notok") {
 			var i
             let copystate = JSON.parse(JSON.stringify(this.state.results))
@@ -132,6 +129,9 @@ render(){
 					<div className = "smallCard">
 						{<h3 style = {{color: "blue"}}> {t('description.favoritesnumber')} {quantity} {t('description.favoritesnumber2')}</h3>}
 					</div>
+					
+					{this.state.anyfavs ? <Spinnercha /> : ""}
+					
 					<ListView results = {this.state.results} feedbacktoApp = {this.toserver}/>
 					<NotificationContainer/>
 					</div>

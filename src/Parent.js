@@ -40,9 +40,9 @@ class LanguageSwitcherSelector extends Component {
   
   
   render() {
-    const options = languages.map(language => {
+    const options = languages.map((language, index) => {
       if(language.code !== this.props.lang){
-        return <li onClick={this.onChange}><div value={language.code} className={language.code} ></div></li>
+        return <li onClick={this.onChange} key = {index}>  <div value={language.code} className={language.code} ></div>  </li>
       }
     });
     return (
@@ -178,7 +178,7 @@ function MainComp() {
 				  */}
 				  <Switch>
 					<Route exact path="/">
-					  <App state = {language} />
+					  <App />
 					</Route>
 					<Route path="/favorites">
 					  <Favorites />

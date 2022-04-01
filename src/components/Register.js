@@ -32,24 +32,24 @@ constructor(props){
 
 username = (e) => {
     this.setState({username : e.target.value})
-	this.setState({usrerr: ""})
+	this.setState({usrerr: false})
 }
 
 password = (e) => {
     this.setState({password: e.target.value})
 	this.setState({passmismatch: false})
-	this.setState({passerr: ""})
+	this.setState({passerr: false})
 }
 
 passwordtwo = (e) => {
     this.setState({passwordverif: e.target.value})
 	this.setState({passmismatch: false})
-	this.setState({passerr: ""})
+	this.setState({passerr: false})
 }
 
 email = (e) => {
 	this.setState({emailaddress: e.target.value})
-	this.setState({emailerr: ""})
+	this.setState({emailerr: false})
 }
 
 clearspinner = (e) => {
@@ -96,13 +96,13 @@ toregister = () => {
 					})
 					
 				} else {
-					if (!this.state.username) {this.setState({usrerr: "error"})}
-					if (!this.state.emailaddress) {this.setState({emailerr: "error"})}
-					if (!this.state.password) {this.setState({passerr: "error"})}
+					if (!this.state.username) {this.setState({usrerr: true})}
+					if (!this.state.emailaddress) {this.setState({emailerr: true})}
+					if (!this.state.password) {this.setState({passerr: true})}
 					NotificationManager.error(t('description.fillall'), t('description.incorrect2'))
 					
 					if(!this.state.emailaddress.includes("@")) {
-						this.setState({emailerr: "error"})
+						this.setState({emailerr: true})
 						NotificationManager.error(t('description.validemail'), t('description.incorrect2'))
 					}
 				}
@@ -111,7 +111,7 @@ toregister = () => {
 		this.setState({passmismatch: true})
 		console.log(this.state.password)
 		console.log(this.state.passwordverif)
-		this.setState({passerr: "error"})
+		this.setState({passerr: true})
 		
 	}
 	

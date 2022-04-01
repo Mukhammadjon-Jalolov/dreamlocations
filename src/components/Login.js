@@ -18,8 +18,8 @@ constructor(props){
         logreg: true,
         username: '',
         password: '',
-		passerr: '',
-		logerr: ''
+		passerr: false,
+		logerr: false
     }
     this.username = this.username.bind(this);
     this.password = this.password.bind(this);
@@ -29,12 +29,12 @@ constructor(props){
 
 username = (e) => {
     this.setState({username : e.target.value})
-	this.setState({logerr : ""})
+	this.setState({logerr : false})
 }
 
 password = (e) => {
     this.setState({password: e.target.value})
-	this.setState({passerr: ""})
+	this.setState({passerr: false})
 }
 
 login(){
@@ -55,41 +55,19 @@ login(){
                 window.location.replace("http://dreamlocation.uz/");
             } else if (response.data == "login failed"){
 				NotificationManager.error(t("description.incorrect"), t("description.incorrect2"));
-				this.setState({logerr: "error"})
-				this.setState({passerr: "error"})
+				this.setState({logerr: true})
+				this.setState({passerr: true})
 			}
         })
     } else {
 		NotificationManager.error(t('description.pleasefill'));
 		if (!this.state.username) {
-			this.setState({logerr: "error"})
+			this.setState({logerr: true})
 		}
 		if (!this.state.password) {
-			this.setState({passerr: "error"})
+			this.setState({passerr: true})
 		}
 	}
-}
-
-logout(){
-    const url = 'http://dreamlocation.uz/api/logout.php'
-
-    if(localStorage.getItem("access_token")){
-        var token = localStorage.getItem("access_token")
-        var currentuser = localStorage.getItem("user")
-    }
-
-    axios.post(url, qs.stringify({user: currentuser}), {headers: {"Authorization" : token}})
-    .then((response) => {
-		
-        if (response.data == "ok") {
-            localStorage.removeItem("access_token")
-            localStorage.removeItem("user")
-            localStorage.removeItem("LoggedIn")
-            localStorage.removeItem("expire_at")
-            console.log("You have been logged out")
-			
-        }
-    })
 }
 
 toggleEnter(){

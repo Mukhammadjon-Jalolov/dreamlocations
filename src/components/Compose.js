@@ -40,13 +40,13 @@ activateTravel(e){
 }
 
 render(){
-	const { t, i18n } = this.props;
-    return (
-    <div>
-        {this.state.landscapesarray.map((result, index) => (
-          <input type = 'button' className = {result.val?'button':'button2'} value = {t(result.landname)} onClick = {this.activateTravel.bind(this, result.landtype)} />
-        ))}
-    </div>
+const { t, i18n } = this.props;
+return (
+<div>
+	{this.state.landscapesarray.map((result, index) => (
+	  <input type = 'button' className = {result.val?'button':'button2'} value = {t(result.landname)} onClick = {this.activateTravel.bind(this, result.landtype)} key = {index}/>
+	))}
+</div>
             )
         }
 }

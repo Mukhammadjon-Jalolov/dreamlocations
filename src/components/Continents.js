@@ -41,14 +41,15 @@ activateTravel(e){
 render(){
 	const { t, i18n } = this.props;
     return (
-    <div>
-			{this.state.continentsarray.map((result, index) => (
-				<input type = 'button' className = {result.val?'button':'button2'} value = {t(result.conttype)} onClick = {this.activateTravel.bind(this, result.continent)} />
-			))}
+<div>
+	{this.state.continentsarray.map((result, index) => (
+		<input type = 'button' className = {result.val?'button':'button2'} value = {t(result.conttype)} onClick = {this.activateTravel.bind(this, result.continent)} key = {index}/>
+	))}
 
-    </div>
-            )
-        }
+</div>
+	
+	)
+	}
 }
 
 export default withTranslation()(Continents);
