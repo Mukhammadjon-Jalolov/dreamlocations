@@ -1,0 +1,57 @@
+{
+  "name": "myapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@material-ui/core": "^4.10.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "base-64": "^0.1.0",
+    "create-react-component-cli": "^1.4.0",
+    "i18next": "^21.6.6",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-full-page": "^0.1.12",
+    "react-gallery-carousel": "^0.2.9",
+    "react-grid-gallery": "^0.5.5",
+    "react-hot-toast": "^2.2.0",
+    "react-i18next": "^11.15.3",
+    "react-image-gallery": "^1.2.7",
+    "react-notifications": "^1.7.3",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.0",
+    "react-scroll-up-button": "^1.6.4",
+    "react-spinners": "^0.11.0",
+    "react-swipeable-views": "^0.13.9",
+    "react-transition-group": "^4.4.1",
+    "remove-node-modules": "^1.7.6",
+    "styled-components": "^5.1.1",
+    "wc-toast": "^1.2.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

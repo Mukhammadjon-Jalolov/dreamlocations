@@ -1,0 +1,26 @@
+.How {
+  top: 70px;
+  position: relative;
+  height: 100%;
+  z-index: -1;
+  background-image: url(./assets/hong kong.jpg);
+  background-size: cover;
+  display: table;
+  margin-bottom: 70px;
+}
+
+
+.How .Howinside {
+  position: static;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: lightslategrey;
+  border-width: medium;
+  padding: 10px;
+  width: 90%;
+  background-color: rgba(200, 200, 250, 0.9);
+  margin: 20px auto 10px auto;
+  word-wrap: break-word;
+  text-align: justify;
+  height: auto;
+}

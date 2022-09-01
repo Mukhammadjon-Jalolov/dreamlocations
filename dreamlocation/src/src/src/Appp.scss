@@ -1,0 +1,323 @@
+#root {
+	height: 100%;
+}
+.html, body {
+	height: 100%;
+}
+
+.Allhere {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin-top: -10px;
+  z-index: 1;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+
+}
+
+.App {
+  text-align: center;
+  position: relative;
+  margin: 0;
+  height: 100%;
+  z-index: 1;
+  background-color: #FFFFF0;
+  display: table;
+  width: 100%;
+  background-image: url(./assets/maldives.jpg);
+  background-size: 100% auto;
+}
+
+.App .Content {
+  margin-top: 60px;
+  height: 100%;
+  position: static;
+  text-align: center;
+  padding: 20px;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.Results .Karta {
+  background-color: rgb(77, 109, 109);
+  position: relative;
+  width: 97%;
+  height: 100%;
+  padding: 0 10px 10px 10px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+
+.smallCard {
+	margin: 0 auto;
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.7);
+	width: fit-content;
+	border-radius: 10px;
+	padding: 0 20px;
+}
+
+
+.Sustainable {
+  top: 0;
+  position: relative;
+  height: 100%;
+  z-index: 3;
+  background-image: url(./assets/traveling.jpg);
+  background-size: cover;
+  display: table;
+}
+
+.Sustainable .Inside {
+  position: static;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: lightslategrey;
+  border-width: medium;
+  padding: 10px;
+  width: 100%;
+  background-color: rgba(180, 180, 250, 0.9);
+  margin: auto;
+  word-wrap: break-word;
+  text-align: justify;
+  height: auto;
+}
+
+.Chiqish {
+	background-color: white;
+	align-items: center;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.footer-dark {
+  padding:20px 0;
+  color:#f0f9ff;
+  background-color:#001323;
+}
+
+.footer-dark h3 {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.footer-dark ul {
+  padding:0;
+  list-style:none;
+  line-height:1.6;
+  font-size:16px;
+  margin-bottom:0;
+}
+
+.footer-dark ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.6;
+}
+
+.footer-dark ul a:hover {
+  opacity:0.8;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item:not(.social) {
+    text-align:center;
+    padding-bottom:20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom:36px;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item.text {
+    margin-bottom:0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity:0.6;
+  margin-bottom:0;
+}
+
+.footer-dark .item.social {
+  text-align:center;
+}
+
+@media (max-width:991px) {
+  .footer-dark .item.social {
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+.footer-dark .item.social > a {
+  font-size:20px;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  margin:0 8px;
+  color:#fff;
+  opacity:0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity:0.9;
+}
+
+.footer-dark .copyright {
+  text-align:center;
+  padding-top:24px;
+  opacity:0.3;
+  font-size:13px;
+  margin-bottom:0;
+}
+
+
+
+
+
+
+.button {
+  background-color: rgb(144, 238, 144); /* Green */
+  border-width: thin;
+  border-color: red;
+  padding: 20px 25px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.button2 {
+  background-color: rgba(144, 238, 144, 1); /* Green */
+  border-width: medium;
+  border-color: ForestGreen;
+  padding: 20px 25px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+
+
+
+
+@keyframes rotating {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+.uz {
+  background-image: url("https://flagcdn.com/36x27/uz.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
+}
+
+.gb {
+  background-image: url("https://flagcdn.com/36x27/gb.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
+}
+
+.fr {
+  background-image: url("https://flagcdn.com/36x27/fr.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
+}
+
+.de{
+  background-image: url("https://flagcdn.com/36x27/de.png");
+  width: 35px;
+  height: 26px;
+  background-repeat: no-repeat;
+}
+
+
+
+.lang{
+  width: 35px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 0px;
+  .dropdown {
+	  position: relative;
+	  left: 0;
+    display: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.lang:hover{
+  .dropdown{
+    display: inline-block;
+    flex-direction: row;
+    align-items: center;
+    li{
+      display: block;
+	  margin: 0;
+      padding: 5px 0 0 0;
+      div:hover{ width: 40px; height: 30px;
+      }
+    }
+  }
+}
