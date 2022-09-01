@@ -75,6 +75,7 @@ componentDidMount(){
 		})
 	}
 
+	
 	const rasmarray = this.importAll(require.context('./assets', false, /\.(png|jpe?g|svg)$/));
 	this.setState({rasmlar: rasmarray})
 	//console.log(rasmarray)
