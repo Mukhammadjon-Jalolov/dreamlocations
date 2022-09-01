@@ -58,13 +58,16 @@ constructor(props){
 }
 
 componentDidMount(){
-	const url = 'http://dreamlocation.uz/test.php'
+	//const url = 'https://dreamlocation.uz/test.php'
+	const url = 'http://localhost:4000/allplaces';
 	
 	var nocontinents = JSON.parse(localStorage.getItem("continentarraystorage"))
 	var nolandscapes = JSON.parse(localStorage.getItem("landscapesarraystorage"))
 	
 	let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
+	
+	/*
 	if (nocontinents && nolandscapes) {
 		this.setState({receiving: true})
 		axios.post(url, qs.stringify({continent: nocontinents, landscape: nolandscapes, user: currentuser}), {headers: {"Authorization" : token}})
@@ -73,9 +76,16 @@ componentDidMount(){
 		this.filterer(data)	// We need to filter texts and images separately from received data
 		this.setState({receiving: false})
 		})
-	}
-
+	}*/
 	
+		axios.get(url)
+		.then(response => response.data)
+		.then((data) => {
+			console.log(data)
+			this.filterer(data)	// We need to filter texts and images separately from received data
+			this.setState({receiving: false})
+		})
+
 	const rasmarray = this.importAll(require.context('./assets', false, /\.(png|jpe?g|svg)$/));
 	this.setState({rasmlar: rasmarray})
 	//console.log(rasmarray)
@@ -118,39 +128,48 @@ handleChangeIndex (index){
 filterer(data){
     if(data){
 		this.setState({receiving: false})
-        var res = data.split("separatorplace")
-        var texts = JSON.parse(res[0])
-        var resultsimg = JSON.parse(res[1])
         
-		if(JSON.parse(res[0]).length){
+		let texts = data;
+		
+		//*******************THIS PART WAS USED WITH PHP BACKEND BEFORE  */
+		/*var res = data.split("separatorplace")
+        var texts = JSON.parse(res[0])
+        var resultsimg = JSON.parse(res[1])*/
+        
+		if(texts.length){
 			this.setState({notfound: false})
 		} else {this.setState({notfound: true})}
 
-for (var i = 0; i < texts.length; i++){
-	var til = localStorage.getItem("deflang")
-	var temptextarr = texts[i].description.split("+")
-	var tempcountrr = texts[i].country.split("+")
-	var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
-	var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
-	texts[i].description = translatedescription
-	texts[i].country = translatecountry
-}
 
-for (var i = 0; i < resultsimg.length; i++){
-    var temptemparr = []
-    var temptemp = {}
-    for (var j = 0; j < resultsimg[i].pictures.length; j++){
-        temptemp = {src: this.state.source + resultsimg[i].pictures[j].img, thumbnail: this.state.source + resultsimg[i].pictures[j].img, thumbnailWidth: 320, thumbnailHeight: 174}
-        temptemparr.push(temptemp)
+	for (let k = 0; k < texts.length; k++){
+
+			var til = localStorage.getItem("deflang")
+			var temptextarr = texts[k].description.split("+")
+			var tempcountrr = texts[k].country.split("+")
+			var translatecountry = {gb: tempcountrr[0], de: tempcountrr[1], fr: tempcountrr[2], uz: tempcountrr[3]}
+			var translatedescription = {gb: temptextarr[0], de: temptextarr[1], fr: temptextarr[2], uz: temptextarr[3]}
+			texts[k].description = translatedescription
+			texts[k].country = translatecountry
+
+			let resultsimg = texts[k].suratlari;		// IT IS AN ARRAY OF 3 IMAGES;
+			var temptemparr = []
+
+			for (var i = 0; i < resultsimg.length; i++){
+				var temptemp = {}
+				temptemp = {src: this.state.source + resultsimg[i].pictures, thumbnail: this.state.source + resultsimg[i].pictures, thumbnailWidth: 320, thumbnailHeight: 174}
+				temptemparr.push(temptemp)
+
+				//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				//texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
+			}
+			texts[k].images = temptemparr;
+			temptemparr = []
+			texts[k].suratlari = []
+	}
+    	this.setState({results:texts})	// VERY IMPORTANT LINE. IT SAVES THE RESULTS LOCALLY
     }
-    texts[i].images = temptemparr
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //texts[i].images = resultsimg[i].pictures    // pictures here is an array of images of one places
-}
-        this.setState({results:texts})
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
-    } else if(!data){
+	
+	else if(!data){
         this.setState({results:[]})		// If no data arrives, then it clears the results state and the screen gets empty
     }
 }
@@ -176,7 +195,7 @@ sendlandscape(versatile){
 
 // This part sends requests to the server with chosen continents or landscape types. The asked places are then received
 sendback(){
-    const url = 'http://dreamlocation.uz/test.php'
+    const url = 'https://dreamlocation.uz/test.php'
     let token = localStorage.getItem("access_token")
     var currentuser = localStorage.getItem("user")
 	this.setState({receiving: true})
@@ -194,7 +213,7 @@ sendback(){
 
 // This part sends like and notlike requests to the server
 toserver(likedplace, notlike) {
-    const url = 'http://dreamlocation.uz/api/liked.php'
+    const url = 'https://dreamlocation.uz/api/liked.php'
     if(localStorage.getItem("access_token")){
         var token = localStorage.getItem("access_token")
         var currentuser = localStorage.getItem("user")
